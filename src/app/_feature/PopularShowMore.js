@@ -61,7 +61,7 @@ export const PopularShowMore = () => {
               <MovieCard
                 key={index}
                 title={movie.title}
-                img={movie.backdrop_path}
+                img={movie.poster_path}
                 rate={movie.vote_average}
               />
             );

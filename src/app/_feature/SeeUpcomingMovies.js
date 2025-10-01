@@ -3,7 +3,7 @@
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import { MovieCard } from "../_components/MovieCard";
 import { useEffect, useState } from "react";
-
+import { useParams } from "next/navigation";
 export const SeeUpcomingMovies = () => {
   const apiBase = "https://api.themoviedb.org/3/movie/upcoming?language=en-US";
   const options = {
@@ -17,6 +17,10 @@ export const SeeUpcomingMovies = () => {
   const [SeeUpcomingMovies, setSeeUpcomingMovies] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+
+  const param = { useParams };
+
+  const { simId } = param;
 
   const getData = async (page = 1) => {
     const data = await fetch(`${apiBase}&page=${page}`, options);
@@ -54,9 +58,10 @@ export const SeeUpcomingMovies = () => {
             {SeeUpcomingMovies.map((movie) => (
               <MovieCard
                 key={movie.id}
-                img={movie.backdrop_path}
+                img={movie.poster_path}
                 title={movie.title}
                 rate={movie.vote_average}
+                movieId={movie.id}
               />
             ))}
           </div>

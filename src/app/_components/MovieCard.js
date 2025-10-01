@@ -1,13 +1,26 @@
+"use client";
 import { Star } from "../_Icons/StarIcon";
+import { useRouter } from "next/navigation";
 
 export const MovieCard = (props) => {
-  const { title, img, rate } = props;
+  const { title, img, rate, movieId } = props;
+  console.log("brrr", movieId);
+
+  const router = useRouter();
+
+  const HandleMovieDetailClick = () => {
+    router.push(`/movie-detail/${movieId}`);
+  };
   return (
-    <div className="w-[229.73px]  flex flex-col   pt-[32px] rounded-lg ">
+    <div
+      className="w-[229.73px]  flex flex-col   pt-[32px] rounded-lg cursor-pointer "
+      onClick={HandleMovieDetailClick}
+    >
       <div className="w=full aspect-[2/3] overflow-hidden rounded-t-lg hover:opacity-[0.5]">
         <img
           className="w-full h-full object-cover  "
           src={`https://image.tmdb.org/t/p/original${img}`}
+          alt="poster"
         ></img>
       </div>
       <div className="flex flex-col p-2 bg-[#F4F4F5] h-[96px] rounded-b-lg  gap-1  ">

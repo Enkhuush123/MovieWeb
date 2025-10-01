@@ -38,11 +38,11 @@ export const PopularMovieSlide = () => {
   return (
     <div className="flex gap-[52px] ">
       <div className="flex flex-col pl-[80px] pr-[80px] ">
-        <div className="flex flex-row justify-between pt-[52px]">
+        <div className="flex flex-row justify-between pt-[52px] w-full">
           <h3 className="font-semibold text-2xl">Popular</h3>
 
           <div>
-            <Link href="/Popular">
+            <Link href="/popular">
               <p className="flex flex-row items-center gap-2 pr-[7px] cursor-pointer">
                 See More
                 <FaArrowRight className="w-[9px] h-[9px]" />
@@ -56,8 +56,9 @@ export const PopularMovieSlide = () => {
               <MovieCard
                 key={index}
                 title={movie.title}
-                img={movie.backdrop_path}
+                img={movie.poster_path}
                 rate={movie.vote_average}
+                movieId={movie.id}
               />
             );
           })}

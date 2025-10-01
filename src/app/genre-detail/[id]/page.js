@@ -1,0 +1,13 @@
+"use client";
+
+import { GenreStyle } from "@/app/_feature/GenreDetailStyle";
+import { Header } from "@/app/_feature/Header";
+
+export default function GenreDetail() {
+  return (
+    <div className="flex flex-col w-[1440px] m-auto shadow-xs border-[#E4E4E7] gap-13">
+      <Header />
+      <GenreStyle />
+    </div>
+  );
+}

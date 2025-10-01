@@ -42,7 +42,7 @@ export const UpComingMovieSlide = () => {
         <div className="flex flex-row justify-between pt-[52px]">
           <h3 className="font-semibold text-2xl">Upcoming</h3>
           <div>
-            <Link href="./UpComing">
+            <Link href="./upComing">
               <p className="flex flex-row items-center gap-2 pr-[7px] cursor-pointer">
                 See More
                 <FaArrowRight className="w-[9px] h-[9px]" />
@@ -56,8 +56,9 @@ export const UpComingMovieSlide = () => {
               <MovieCard
                 key={movie.id}
                 title={movie.title}
-                img={movie.backdrop_path}
+                img={movie.poster_path}
                 rate={movie.vote_average}
+                movieId={movie.id}
               />
             );
           })}

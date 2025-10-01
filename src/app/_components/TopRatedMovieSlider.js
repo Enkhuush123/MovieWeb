@@ -51,7 +51,7 @@ export const TopRatedMovieSlider = () => {
           <h3 className="font-semibold text-2xl">Top Rated</h3>
 
           <div>
-            <Link href="./TopRatedMovies/">
+            <Link href="./topRatedMovies/">
               <p className="flex flex-row items-center gap-2 pr-[7px] cursor-pointer">
                 See More
                 <FaArrowRight className="w-[9px] h-[9px]" />
@@ -65,8 +65,9 @@ export const TopRatedMovieSlider = () => {
               <MovieCard
                 key={index}
                 title={movie.title}
-                img={movie.backdrop_path}
+                img={movie.poster_path}
                 rate={movie.vote_average}
+                movieId={movie.id}
               />
             );
           })}

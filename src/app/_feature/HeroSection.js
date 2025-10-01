@@ -17,7 +17,7 @@ export const HeroSectionSlide = (props) => {
         className="w-full h-full absolute -z-10 object-cover inset-0"
       ></img>
 
-      <div className="flex ">
+      <div className="flex  ">
         <div className="text-white flex flex-col gap-4 pt-[178px] pl-[140px] w-[650px] h-full ">
           <div>
             <div>
@@ -38,7 +38,7 @@ export const HeroSectionSlide = (props) => {
           </div>
 
           <div>
-            <button className="w-[145px] h-[40px] bg-white text-black rounded-lg flex items-center justify-center gap-2 hover:opacity-70 transition duration-300 cursor-pointer  ">
+            <button className=" w-[145px] h-[40px] bg-white text-black rounded-lg flex items-center justify-center gap-2 hover:opacity-70 transition duration-300 cursor-pointer relative z-20  ">
               <Watch />
               Watch Trailer
             </button>

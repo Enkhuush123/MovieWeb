@@ -57,7 +57,7 @@ export const Header = () => {
   }, []);
 
   return (
-    <div className="flex  flex-row justify-between items-center pl-40 pt-3 pr-40 ">
+    <div className="flex  flex-row justify-between items-center pl-20 pt-3 pr-20 ">
       <div className="flex items-center  gap-2">
         <FilmIconPurple />
         <p className="text-indigo-700 font-bold text-base ">Movie Z</p>
@@ -76,7 +76,7 @@ export const Header = () => {
             </button>
           </div>
           {openGenres && (
-            <div className="absolute w-[577px] bg-white mt-95 ml-120 flex flex-col flex-wrap p-5 gap-5 shadow-xs rounded-lg border border-[#E4E4E7] z-10 ">
+            <div className="absolute w-[577px] bg-white mt-95 ml-120 flex flex-col flex-wrap p-5 gap-5 shadow-xs rounded-lg border border-[#E4E4E7] z-50 ">
               <div className="flex flex-col gap-2">
                 <h3 className="font-semibold text-2xl">Genres</h3>
                 <p>See lists of movies by genre</p>
@@ -84,7 +84,13 @@ export const Header = () => {
               <div className="w-[537px] border border-[#E4E4E7]"></div>
               <div className="flex flex-wrap gap-4  ">
                 {genreList.map((genres) => {
-                  return <Genre key={genres.id} name={genres.name} />;
+                  return (
+                    <Genre
+                      key={genres.id}
+                      name={genres.name}
+                      genreId={genres.id}
+                    />
+                  );
                 })}
               </div>
             </div>

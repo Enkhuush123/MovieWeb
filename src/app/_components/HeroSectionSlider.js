@@ -54,7 +54,7 @@ export const HeroSectionList = () => {
   }
 
   return (
-    <div className=" relative h-[full] w-full overflow-hidden  ">
+    <div className=" relative h-[full] w-full overflow-hidden">
       <div
         className="flex transition-transform duration-700 ease-in-out"
         style={{
@@ -73,40 +73,45 @@ export const HeroSectionList = () => {
               overview={movie.overview}
               onPrev={prev}
               onNext={next}
+              movieId={movie.id}
             />
           </div>
         ))}
       </div>
 
-      <div className="absolute justify-center items-center px-10 z-2 inset-0 flex">
-        {currentIndex > 0 && (
-          <button
-            onClick={prev}
-            className="w-10 h-10 bg-white rounded-full flex justify-center items-center cursor-pointer"
-          >
-            <LeftArrow />
-          </button>
-        )}
-        <div className="flex items-end h-9/10 justify-center w-full gap-2">
-          {headerMovie.slice(0, 5).map((movie, idx) => (
+      <div className="absolute inset-0 flex items-center justify-between px-10 z-20">
+        <div>
+          {currentIndex > 0 && (
             <button
-              key={movie.id}
-              onClick={() => setCurrentIndex(idx)}
-              className={`w-2 h-2 rounded-full ${
-                idx === currentIndex ? "bg-white" : "bg-white/40"
-              }`}
-            ></button>
-          ))}
+              onClick={prev}
+              className="w-10 h-10 bg-white rounded-full flex justify-center items-center cursor-pointer "
+            >
+              <LeftArrow />
+            </button>
+          )}
         </div>
-        {currentIndex < headerMovie.length - 1 && (
-          <button
-            onClick={next}
-            className="w-10 h-10 bg-white rounded-full flex justify-center items-center cursor-pointer"
-          >
-            <RightButton />
-          </button>
-        )}
+        <div>
+          {currentIndex < headerMovie.length - 1 && (
+            <button
+              onClick={next}
+              className="w-10 h-10 bg-white rounded-full flex justify-center items-center cursor-pointer "
+            >
+              <RightButton />
+            </button>
+          )}
+        </div>
       </div>
+      {/* <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2 z-50">
+        {headerMovie.map((movie, idx) => (
+          <button
+            key={movie.id}
+            onClick={() => setCurrentIndex(idx)}
+            className={`w-2 h-2 rounded-full ${
+              idx === currentIndex ? "bg-white" : "bg-white/40"
+            }`}
+          ></button>
+        ))}
+      </div> */}
     </div>
   );
 };

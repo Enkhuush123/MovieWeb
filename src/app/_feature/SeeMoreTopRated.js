@@ -54,7 +54,7 @@ export const SeeMoreTopRated = () => {
             {SeeMoreTopRatedMovies.map((movie) => (
               <MovieCard
                 key={movie.id}
-                img={movie.backdrop_path}
+                img={movie.poster_path}
                 title={movie.title}
                 rate={movie.vote_average}
               />
