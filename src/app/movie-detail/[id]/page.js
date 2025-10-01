@@ -2,6 +2,7 @@
 import { Footer } from "@/app/_feature/Footer";
 import { Header } from "@/app/_feature/Header";
 import { MovieDetails } from "@/app/_feature/MovieDetailStyle";
+import { useParams } from "next/navigation";
 
 export default function MovieDetail() {
   return (

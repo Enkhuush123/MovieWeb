@@ -9,7 +9,7 @@ export const MovieCard = (props) => {
   const router = useRouter();
 
   const HandleMovieDetailClick = () => {
-    router.push(`/movie-detail/${movieId}`);
+    router.replace(`/movie-detail/${movieId}`);
   };
   return (
     <div
@@ -34,7 +34,7 @@ export const MovieCard = (props) => {
           </div>
         </div>
 
-        <div className="font-normal text-lg flex flex-col">
+        <div className="font-normal text-lg flex flex-col line-clamp-3">
           <p>{title}</p>
         </div>
       </div>

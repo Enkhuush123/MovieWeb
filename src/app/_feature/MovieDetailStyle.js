@@ -6,6 +6,7 @@ import { useParams } from "next/navigation";
 import { FaArrowRight } from "react-icons/fa";
 import { MovieCard } from "../_components/MovieCard";
 import { Watch } from "../_Icons/WatchIcon";
+import Link from "next/link";
 
 const options = {
   method: "GET",
@@ -128,23 +129,25 @@ export const MovieDetails = () => {
               src={`https://image.tmdb.org/t/p/original${movieDetail.backdrop_path}`}
               alt={movieDetail.title}
             ></img>
-            <div className="flex items-end p-6 h-full">
-              <div className="items-center flex gap-4">
-                <button
-                  onClick={() => setShowTrailer(true)}
-                  className="w-10 h-10 rounded-full bg-white items-center justify-center flex cursor-pointer"
-                >
-                  <Watch />
-                </button>
-                <p className="text-white items-center justify-center">
-                  Play trailer
-                </p>
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-100 ">
+              <div className="flex items-end p-6 h-full">
+                <div className="items-center flex gap-4">
+                  <button
+                    onClick={() => setShowTrailer(true)}
+                    className="w-10 h-10 rounded-full bg-white items-center justify-center flex cursor-pointer "
+                  >
+                    <Watch />
+                  </button>
+                  <p className="text-white items-center justify-center">
+                    Play trailer
+                  </p>
+                </div>
               </div>
             </div>
           </div>
         </div>
         {showTrailer && trailer && (
-          <div className="bg-black fixed inset-0 bg-opacity-50 flex justify-center items-center">
+          <div className="bg-black fixed inset-0 bg-opacity-50 flex justify-center items-center ">
             <div>
               {trailer ? (
                 <iframe
@@ -176,7 +179,7 @@ export const MovieDetails = () => {
               return (
                 <div
                   key={genres.id}
-                  className="w-[77px] h-[20px] rounded-full border flex items-center justify-center border-[#E4E4E7] font-semibold text-xs cursor-pointer"
+                  className=" h-[20px] p-2 rounded-full border flex items-center justify-center border-[#E4E4E7] font-semibold text-xs cursor-pointer"
                 >
                   {genres.name}
                 </div>
@@ -207,18 +210,21 @@ export const MovieDetails = () => {
           </div>
         </div>
       </div>
-      <div className="flex gap-[52px] w-[1280px]">
+      <div className="flex gap-[52px] w-[1280px] ">
         <div>
           <div className="flex flex-row justify-between pt-[52px]">
             <h3 className="font-semibold text-2xl">More like this</h3>
 
             <div>
-              <p className="flex flex-row items-center gap-2 pr-[7px] cursor-pointer">
-                See More
-                <FaArrowRight className="w-[9px] h-[9px]" />
-              </p>
+              <Link href={`/similiar-movies/${id}`}>
+                <p className="flex flex-row items-center gap-2 pr-[7px] cursor-pointer">
+                  See More
+                  <FaArrowRight className="w-[9px] h-[9px]" />
+                </p>
+              </Link>
             </div>
           </div>
+
           <div className="flex flex-wrap gap-8">
             {similiar.slice(0, 5).map((movie) => {
               return (
@@ -227,6 +233,8 @@ export const MovieDetails = () => {
                   img={`https://image.tmdb.org/t/p/original${movie.poster_path} `}
                   rate={movie.vote_average}
                   title={movie.title}
+                  movieId={movie.id}
+                  id={movie.id}
                 />
               );
             })}

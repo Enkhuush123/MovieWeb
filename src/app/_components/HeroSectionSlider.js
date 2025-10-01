@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { HeroSectionSlide } from "../_feature/HeroSection";
 import { RightButton } from "../_Icons/RightIcon";
 import { LeftArrow } from "../_Icons/LeftArrowIcon";
+import { Watch } from "../_Icons/WatchIcon";
 
 export const HeroSectionList = () => {
   const apiLink =
@@ -63,7 +64,7 @@ export const HeroSectionList = () => {
       >
         {headerMovie.map((movie) => (
           <div
-            className="w-[1440px] h-[700px] flex-shrink-0 relative  "
+            className="w-[1440px] h-[700px] flex-shrink-0 relative"
             key={movie.id}
           >
             <HeroSectionSlide
@@ -89,6 +90,12 @@ export const HeroSectionList = () => {
               <LeftArrow />
             </button>
           )}
+        </div>
+        <div>
+          <button className="  w-[145px] h-[40px] bg-white text-black rounded-lg flex items-center justify-center gap-2 hover:opacity-70 transition duration-300 cursor-pointer relative z-50  ">
+            <Watch />
+            Watch Trailer
+          </button>
         </div>
         <div>
           {currentIndex < headerMovie.length - 1 && (
