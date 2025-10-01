@@ -23,7 +23,7 @@ export const SeeMoreTopRated = () => {
   const getData = async (page = 1) => {
     const data = await fetch(`${apiBase}&page=${page}`, options);
     const jsonData = await data.json();
-    setTotalPages(jsonData.total_pages);
+    setTotalPages(Math.min(jsonData.total_pages, 50));
     setSeeMoreTopRatedMovies(jsonData.results);
     setCurrentPage(page);
   };
@@ -32,6 +32,33 @@ export const SeeMoreTopRated = () => {
   useEffect(() => {
     getData(1);
   }, []);
+
+  const getPagination = () => {
+    const pages = [];
+    const maxButtons = 5;
+    let start = Math.max(1, currentPage - 2);
+    let end = Math.min(totalPages, start + maxButtons - 1);
+
+    if (end - start < maxButtons - 1) {
+      start = Math.max(1, end - maxButtons + 1);
+    }
+
+    if (start > 1) {
+      pages.push(1);
+      if (start > 2) pages.push("...");
+    }
+
+    for (let i = start; i <= end; i++) {
+      pages.push(i);
+    }
+
+    if (end < totalPages) {
+      if (end < totalPages - 1) pages.push("...");
+      pages.push(totalPages);
+    }
+
+    return pages;
+  };
 
   const prevPage = () => {
     if (currentPage > 1) {
@@ -43,6 +70,7 @@ export const SeeMoreTopRated = () => {
       getData(currentPage + 1);
     }
   };
+
   return (
     <div className="flex flex-col w-[1440px] m-auto gap-10">
       <div className="flex gap-[52px] pt-[52px] ">
@@ -74,13 +102,17 @@ export const SeeMoreTopRated = () => {
         >
           <LeftArrow /> Prev
         </button>
-        {Array.from({ length: Math.min(totalPages, 5) }, (_, i) => i + 1).map(
-          (page) => (
+        {getPagination().map((page, idx) =>
+          page === "..." ? (
+            <span key={idx} className="px-2 py-1">
+              ...
+            </span>
+          ) : (
             <button
-              key={page}
+              key={idx}
               onClick={() => getData(page)}
               className={`px-3 py-1 rounded cursor-pointer ${
-                currentPage === page ? "border border-[#ddd]" : " "
+                currentPage === page ? "border border-[#ddd]" : ""
               }`}
             >
               {page}
