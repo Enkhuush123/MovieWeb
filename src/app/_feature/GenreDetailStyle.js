@@ -127,8 +127,8 @@ export const GenreStyle = () => {
         <div>
           <div>
             <p>
-              {totalResults} titles in "
-              {genreList.find((g) => g.id == id)?.name || "Genre"}"
+              {totalResults} titles in &quot;
+              {genreList.find((g) => g.id == id)?.name || "Genre"}&quot;
             </p>
             <div className="flex flex-wrap gap-8 w-[1100px]">
               {genreMovies.slice(0, 12).map((movie, genres) => {

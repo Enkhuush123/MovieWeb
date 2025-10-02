@@ -94,7 +94,7 @@ export const SearchPop = () => {
           <div className="flex gap-8 flex-col">
             <div>
               <p>
-                {searchResult} results for "{id}"
+                {searchResult} results for &quot;{id}&quot;
               </p>
             </div>
             <div className="flex flex-wrap gap-8">

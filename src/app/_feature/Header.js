@@ -155,7 +155,7 @@ export const Header = ({}) => {
                 onClick={() => router.push(`/search-detail/${searchInput}`)}
                 className="w-[230px] h-[40px] flex pl-4 items-center cursor-pointer"
               >
-                See all results for "{searchInput}"
+                See all results for &quot;{searchInput}&quot;
               </div>
             </div>
           )}

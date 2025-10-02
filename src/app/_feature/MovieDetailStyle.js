@@ -65,6 +65,7 @@ export const MovieDetails = () => {
   }
 
   useEffect(() => {
+    if (!id) return;
     getData();
   }, [id]);
 
