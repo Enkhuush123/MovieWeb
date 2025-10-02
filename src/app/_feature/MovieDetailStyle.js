@@ -33,6 +33,9 @@ export const MovieDetails = () => {
   const apiSim = `https://api.themoviedb.org/3/movie/${id}/similar?language=en-US&page=1`;
   const apiTrailer = `https://api.themoviedb.org/3/movie/${id}/videos?language=en-US`;
 
+  if (!movieDetail || !credits) {
+    return <div>Loading...</div>;
+  }
   const getData = async () => {
     const data = await fetch(apiLink, options);
     const jsonData = await data.json();
@@ -59,13 +62,8 @@ export const MovieDetails = () => {
     setTrailer(OffTrailer);
     console.log(jsonData04, "trailer");
   };
-
-  if (!movieDetail || !credits) {
-    return <div>Loading...</div>;
-  }
-
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
-    if (!id) return;
     getData();
   }, [id]);
 
