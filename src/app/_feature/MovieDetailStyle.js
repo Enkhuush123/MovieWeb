@@ -28,6 +28,7 @@ export const MovieDetails = () => {
 
   const { id } = param;
   const apiLink = `https://api.themoviedb.org/3/movie/${id}?language=en-US`;
+
   const apiBase = `https://api.themoviedb.org/3/movie/${id}/credits?language=en-US`;
   const apiSim = `https://api.themoviedb.org/3/movie/${id}/similar?language=en-US&page=1`;
   const apiTrailer = `https://api.themoviedb.org/3/movie/${id}/videos?language=en-US`;

@@ -7,14 +7,19 @@ import { FilmIconPurple } from "../_Icons/FilmIconPurple";
 
 import { Genre } from "../_components/GenreCard";
 import { useEffect, useState } from "react";
+import { SearchPop } from "./SearchPopUp";
+import { Star } from "../_Icons/StarIcon";
+import { RightButton } from "../_Icons/RightIcon";
+import { useRouter } from "next/navigation";
 
-export const Header = () => {
+export const Header = ({}) => {
   const [openGenres, setOpenGenres] = useState(false);
   const [genreList, setGenreList] = useState([]);
   const [searchInput, setSearchInput] = useState("");
   const [searchResults, setSearchResults] = useState([]);
 
   const apiLink = "https://api.themoviedb.org/3/genre/movie/list?language=en";
+  const router = useRouter();
 
   const options = {
     method: "GET",
@@ -41,7 +46,7 @@ export const Header = () => {
     );
 
     const jsonInputData = await result.json();
-    setSearchResults(jsonInputData.results || []);
+    setSearchResults(jsonInputData.results);
   };
 
   const getData = async () => {
@@ -58,7 +63,10 @@ export const Header = () => {
 
   return (
     <div className="flex  flex-row justify-between items-center pl-20 pt-3 pr-20 ">
-      <div className="flex items-center  gap-2">
+      <div
+        onClick={() => router.push("/")}
+        className="flex items-center  gap-2 cursor-pointer hover:scale-110"
+      >
         <FilmIconPurple />
         <p className="text-indigo-700 font-bold text-base ">Movie Z</p>
       </div>
@@ -88,7 +96,8 @@ export const Header = () => {
                     <Genre
                       key={genres.id}
                       name={genres.name}
-                      genreId={genres.id}
+                      genresId={genres.id}
+                      id={genres.id}
                     />
                   );
                 })}
@@ -108,6 +117,48 @@ export const Header = () => {
             type="search"
             placeholder="Search"
           ></input>
+          {searchResults.length > 0 && (
+            <div className="w-[577px] h-auto bg-white absolute top-20 z-50 flex flex-col gap-0 ">
+              {searchResults.slice(0, 5).map((movie) => {
+                return (
+                  <div
+                    onClick={() => router.push(`/movie-detail/${movie.id}`)}
+                    className="w-[553px] h-[116px] flex gap-3 hover:bg-black hover:text-white p-2 border-b border-gray-300 hover:scale-110 cursor-pointer "
+                    key={movie.id}
+                    title={movie.title}
+                  >
+                    <div>
+                      <img
+                        className="w-[67px] h-[100px] rounded object-cover"
+                        src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
+                      ></img>
+                    </div>
+                    <div className="flex flex-col ">
+                      <div>{movie.title}</div>
+                      <div className="flex flex-row items-center gap-1">
+                        <Star />{" "}
+                        <p>
+                          {movie.vote_average}
+                          <span className="text-xs text-gray-500">/10</span>
+                        </p>
+                      </div>
+                    </div>
+                    <div className="flex flex-row ">
+                      <div className="flex  ">
+                        <p>2024</p>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+              <div
+                onClick={() => router.push(`/search-detail/${searchInput}`)}
+                className="w-[230px] h-[40px] flex pl-4 items-center cursor-pointer"
+              >
+                See all results for "{searchInput}"
+              </div>
+            </div>
+          )}
         </div>
       </div>
       <div>

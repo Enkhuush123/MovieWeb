@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { Genre } from "../_components/GenreCard";
 import { useParams } from "next/navigation";
+import { MovieCard } from "../_components/MovieCard";
 
 const options = {
   method: "GET",
@@ -16,53 +17,176 @@ const options = {
 export const GenreStyle = () => {
   const [genreList, setGenreList] = useState([]);
   const [genreMovies, setGenreMovies] = useState([]);
+  const [totalResults, setTotalResults] = useState([0]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
 
   const param = useParams();
-  const { genreId } = param;
+  const { id } = param;
+  const apiGenreList = `https://api.themoviedb.org/3/discover/movie?language=en&with_genres=${id}&page=1`;
+  const apiGenre = `https://api.themoviedb.org/3/genre/movie/list?language=en`;
 
-  console.log(genreId, "genre");
-  const getData = async () => {
-    const apiGenre = `https://api.themoviedb.org/3/genre/movie/list?language=en`;
-    const apiGenreList = `https://api.themoviedb.org/3/discover/movie?language=en&with_genres=${genreId}&page=1`;
+  console.log(id, "genre");
+  const getData = async (page = 1) => {
     const data = await fetch(apiGenre, options);
     const jsonData = await data.json();
     setGenreList(jsonData.genres);
-    console.log(jsonData, "genre");
-    const data01 = await fetch(apiGenreList, options);
-    const jsonData01 = await data01.json();
-    setGenreMovies(jsonData01.results);
-    console.log(jsonData01, "genre");
+    console.log(jsonData, "genre1");
+
+    console.log(apiGenreList, "genrei");
+
+    // const data01 = await fetch(apiGenreList, options);
+    // const jsonData01 = await data01.json();
+    // setGenreMovies(jsonData01.results);
+    // setTotalResults(jsonData01.total_results);
+    // console.log(jsonData01, "genre1");
+
+    const data02 = await fetch(`${apiGenreList}&page=${page}`, options);
+    const jsonData02 = await data02.json();
+    setGenreMovies(jsonData02.results);
+    setTotalPages(Math.min(jsonData02.total_pages, 50));
+    setTotalResults(jsonData02.total_results);
+    setCurrentPage(page);
+    console.log(genreMovies, "moive");
   };
 
   useEffect(() => {
     getData();
-  }, [genreId]);
+  }, [id]);
+
+  const getPagination = () => {
+    const pages = [];
+    const maxButtons = 5;
+    let start = Math.max(1, currentPage - 2);
+    let end = Math.min(totalPages, start + maxButtons - 1);
+
+    if (end - start < maxButtons - 1) {
+      start = Math.max(1, end - maxButtons + 1);
+    }
+
+    if (start > 1) {
+      pages.push(1);
+      if (start > 2) pages.push("...");
+    }
+
+    for (let i = start; i <= end; i++) {
+      pages.push(i);
+    }
+
+    if (end < totalPages) {
+      if (end < totalPages - 1) pages.push("...");
+      pages.push(totalPages);
+    }
+
+    return pages;
+  };
+
+  const prevPage = () => {
+    if (currentPage > 1) {
+      getData(currentPage - 1);
+    }
+  };
+  const nextPage = () => {
+    if (currentPage < totalPages) {
+      getData(currentPage + 1);
+    }
+  };
 
   return (
-    <div className="w-[1440px] pr-20 pl-20 flex flex-col gap-8">
-      <div>
+    <div className="flex flex-col gap-8 ">
+      <div className="pl-20">
         <h1 className="font-semibold text-3xl">Search filter</h1>
       </div>
-      <div className="flex gap-5 ">
-        <div className=" w-[387px] flex flex-col flex-wrap  gap-5  rounded-lg  ">
-          <div className="flex flex-col gap-2">
-            <h3 className="font-semibold text-2xl">Genres</h3>
-            <p>See lists of movies by genre</p>
-          </div>
+      <div className="w-[1440px] pr-20 pl-20 flex flex-row gap-8">
+        <div className="flex flex-col gap-5 ">
+          <div className="flex gap-5 ">
+            <div className=" w-[387px] flex flex-col flex-wrap  gap-5  rounded-lg  ">
+              <div className="flex flex-col gap-2">
+                <h3 className="font-semibold text-2xl">Genres</h3>
+                <p>See lists of movies by genre </p>
+              </div>
 
-          <div className="flex flex-wrap gap-4  ">
-            {genreList.map((genres) => {
-              return (
-                <Genre key={genres.id} name={genres.name} genreId={genres.id} />
-              );
-            })}
+              <div className="flex flex-wrap gap-4  ">
+                {genreList.map((genres) => {
+                  return (
+                    <Genre
+                      key={genres.id}
+                      name={genres.name}
+                      id={genres.id}
+                      genresId={genres.id}
+                    />
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="border-r"></div>
+
+        <div>
+          <div>
+            <p>
+              {totalResults} titles in "
+              {genreList.find((g) => g.id == id)?.name || "Genre"}"
+            </p>
+            <div className="flex flex-wrap gap-8 w-[1100px]">
+              {genreMovies.slice(0, 12).map((movie, genres) => {
+                return (
+                  <MovieCard
+                    key={movie.id}
+                    img={movie.poster_path}
+                    title={movie.title}
+                    rate={movie.vote_average}
+                    movieId={movie.id}
+                    id={genres.id}
+                  />
+                );
+              })}
+            </div>
           </div>
         </div>
       </div>
-      <div>
-        <div>
-          <p>81 titles in "Animation"</p>
-        </div>
+      <div className="flex gap-2 w-full h-10 items-end justify-end pr-[80px] ">
+        <button
+          onClick={prevPage}
+          disabled={currentPage === 1}
+          className={`px-3 py-1 rounded flex items-center gap-1 cursor-pointer  ${
+            currentPage === 1
+              ? " cursor-not-allowed opacity-50"
+              : " shadow-xs  "
+          }`}
+        >
+          Prev
+        </button>
+        {getPagination().map((page, idx) =>
+          page === "..." ? (
+            <span key={idx} className="px-2 py-1">
+              ...
+            </span>
+          ) : (
+            <button
+              key={idx}
+              onClick={() => getData(page)}
+              className={`px-3 py-1 rounded cursor-pointer ${
+                currentPage === page ? "border border-[#ddd]" : ""
+              }`}
+            >
+              {page}
+            </button>
+          )
+        )}
+        <button
+          onClick={nextPage}
+          disabled={currentPage === totalPages}
+          className={`px-3 py-1 rounded flex items-center gap-1 cursor-pointer ${
+            currentPage === totalPages
+              ? " cursor-not-allowed opacity-50"
+              : "shadow-xs"
+          }`}
+        >
+          Next
+        </button>
       </div>
     </div>
   );

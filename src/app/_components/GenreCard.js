@@ -4,11 +4,11 @@ import { useRouter } from "next/navigation";
 import { RightButton } from "../_Icons/RightIcon";
 
 export const Genre = (props) => {
-  const { name, genreId } = props;
+  const { name, genresId } = props;
   const userouter = useRouter();
 
   const handleGenreClick = () => {
-    userouter.push(`/genre-detail/${genreId}`);
+    userouter.push(`/genre-detail/${genresId}`);
   };
   return (
     <button
