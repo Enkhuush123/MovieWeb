@@ -93,7 +93,7 @@ export const GenreStyle = () => {
   };
 
   return (
-    <div className="flex flex-col gap-8 ">
+    <div className="flex flex-col gap-8 w-[1280px] ">
       <div className="pl-20">
         <h1 className="font-semibold text-3xl">Search filter</h1>
       </div>
@@ -130,8 +130,8 @@ export const GenreStyle = () => {
               {totalResults} titles in &quot;
               {genreList.find((g) => g.id == id)?.name || "Genre"}&quot;
             </p>
-            <div className="flex flex-wrap gap-8 w-[1100px]">
-              {genreMovies.slice(0, 12).map((movie, genres) => {
+            <div className="flex flex-wrap gap-8 w-[800px]">
+              {genreMovies.slice(0, 9).map((movie, genres) => {
                 return (
                   <MovieCard
                     key={movie.id}
@@ -147,7 +147,7 @@ export const GenreStyle = () => {
           </div>
         </div>
       </div>
-      <div className="flex gap-2 w-full h-10 items-end justify-end pr-[80px] ">
+      <div className="flex gap-2 w-full h-10 items-end justify-end  ">
         <button
           onClick={prevPage}
           disabled={currentPage === 1}

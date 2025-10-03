@@ -4,6 +4,7 @@ import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import { MovieCard } from "../_components/MovieCard";
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
+import { Loading } from "../_components/Loading";
 export const SeeUpcomingMovies = () => {
   const apiBase = "https://api.themoviedb.org/3/movie/upcoming?language=en-US";
   const options = {
@@ -17,17 +18,20 @@ export const SeeUpcomingMovies = () => {
   const [SeeUpcomingMovies, setSeeUpcomingMovies] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [loading, setLoading] = useState(false);
 
   const param = { useParams };
 
   const { simId } = param;
 
   const getData = async (page = 1) => {
+    setLoading(true);
     const data = await fetch(`${apiBase}&page=${page}`, options);
     const jsonData = await data.json();
     setTotalPages(Math.min(jsonData.total_pages, 50));
     setSeeUpcomingMovies(jsonData.results);
     setCurrentPage(page);
+    setTimeout(() => setLoading(false), 600);
   };
   console.log(SeeUpcomingMovies, "haha");
   console.log(totalPages, "total");
@@ -73,6 +77,10 @@ export const SeeUpcomingMovies = () => {
       getData(currentPage + 1);
     }
   };
+
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
     <div className="flex flex-col w-[1440px] m-auto gap-10">

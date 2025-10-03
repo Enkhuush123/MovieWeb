@@ -5,6 +5,7 @@ import { MovieCard } from "./MovieCard";
 import { useEffect, useState } from "react";
 
 import Link from "next/link";
+import { Loading } from "./Loading";
 
 export const UpComingMovieSlide = () => {
   const apiLink =
@@ -28,13 +29,17 @@ export const UpComingMovieSlide = () => {
     const data = await fetch(apiLink, options);
     const jsonData = await data.json();
     setUpComingMovieList(jsonData.results);
-    setLoading(false);
+    setTimeout(() => setLoading(false), 600);
   };
   console.log(upComingMovieList);
 
   useEffect(() => {
     getData();
   }, []);
+
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
     <div className="flex gap-[52px]  ">

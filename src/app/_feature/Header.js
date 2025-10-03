@@ -72,7 +72,7 @@ export const Header = ({}) => {
       </div>
 
       <div className="flex items-center gap-8 ">
-        <div className="flex items-center border border-[#E4E4E7] w-[97px] h-[36px] rounded-lg gap-2 justify-center font-medium text-sm ">
+        <div className="flex items-center border border-[#E4E4E7] w-[97px] h-[36px] rounded-lg gap-2 justify-center font-medium text-sm hover:scale-110">
           <div className="flex items-center gap-2 cursor-pointer relative ">
             <FaChevronDown className="opactiy-50 w-[14px] h-[10px]" />
             <button
@@ -106,14 +106,14 @@ export const Header = ({}) => {
           )}
         </div>
         <div
-          className="flex items-center gap-2   w-[379px] h-[36px] rounded-lg p-3 border border-[#E4E4E7]
+          className="flex items-center gap-2   w-[379px] h-[36px] rounded-lg p-3 border border-[#E4E4E7] hover:scale-110 ]
                 "
         >
           <FaSearch className="opacity-50 w-[11px] h-[11px] " />
           <input
             value={searchInput}
             onChange={searchHandle}
-            className="pl-2 outline-none"
+            className="pl-2 outline-none w-[379px] "
             type="search"
             placeholder="Search"
           ></input>
@@ -145,7 +145,7 @@ export const Header = ({}) => {
                     </div>
                     <div className="flex flex-row ">
                       <div className="flex  ">
-                        <p>2024</p>
+                        <p>{movie.release_date}</p>
                       </div>
                     </div>
                   </div>

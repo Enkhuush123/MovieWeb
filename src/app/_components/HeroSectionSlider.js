@@ -28,12 +28,7 @@ export const HeroSectionList = () => {
     const data = await fetch(apiLink, options);
     const jsonData = await data.json();
     setHeaderMovie(jsonData.results.slice(0, 5));
-    setTimeout(() => {
-      setLoading(false);
-      {
-        1000;
-      }
-    });
+    setTimeout(() => setLoading(false), 600);
 
     console.log(jsonData, "haha");
   };
@@ -51,7 +46,11 @@ export const HeroSectionList = () => {
   };
 
   if (loading) {
-    return <div className=" w-full h-[700px] flex  bg-grey-100"></div>;
+    return (
+      <div className="w-full h-[700px] flex items-center justify-center bg-gray-200">
+        <div className="w-[1440px] h-[700px] bg-gray-300 rounded-lg"></div>
+      </div>
+    );
   }
 
   return (

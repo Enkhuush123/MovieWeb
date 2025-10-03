@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import { MovieCard } from "./MovieCard";
 import Link from "next/link";
+import { Loading } from "./Loading";
 
 export const TopRatedMovieSlider = () => {
   const apiLink =
@@ -29,7 +30,7 @@ export const TopRatedMovieSlider = () => {
     const data = await fetch(apiLink, options);
     const jsonData = await data.json();
     setUpComingMovieList(jsonData.results);
-    setLoading(false);
+    setTimeout(() => setLoading(false), 600);
   };
   console.log(upComingMovieList);
 
@@ -37,16 +38,13 @@ export const TopRatedMovieSlider = () => {
     getData();
   }, []);
 
-  const showallmovies = () => {
-    setShowMovies((prev) => prev + 10);
-  };
+  if (loading) {
+    return <Loading />;
+  }
 
-  const showlessmovies = () => {
-    setShowMovies((prev) => prev - 10);
-  };
   return (
     <div className="flex gap-[52px] ">
-      <div className="flex flex-col pl-[80px] pr-[80px] ">
+      <div className="flex flex-col pl-[80px] pr-[80px] gap-8 ">
         <div className="flex flex-row justify-between pt-[52px]">
           <h3 className="font-semibold text-2xl">Top Rated</h3>
 

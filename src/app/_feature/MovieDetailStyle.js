@@ -7,6 +7,7 @@ import { FaArrowRight } from "react-icons/fa";
 import { MovieCard } from "../_components/MovieCard";
 import { Watch } from "../_Icons/WatchIcon";
 import Link from "next/link";
+import { MovieDetailLoading } from "../_components/MovieDetailLoading";
 
 const options = {
   method: "GET",
@@ -23,6 +24,7 @@ export const MovieDetails = () => {
   const [similiar, setSimiliar] = useState([]);
   const [trailer, setTrailer] = useState([]);
   const [showTrailer, setShowTrailer] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const param = useParams();
 
@@ -34,6 +36,7 @@ export const MovieDetails = () => {
   const apiTrailer = `https://api.themoviedb.org/3/movie/${id}/videos?language=en-US`;
 
   const getData = async () => {
+    setLoading(true);
     const data = await fetch(apiLink, options);
     const jsonData = await data.json();
     setMovieDetail(jsonData);
@@ -45,6 +48,7 @@ export const MovieDetails = () => {
     const data03 = await fetch(apiSim, options);
     const jsonData03 = await data03.json();
     setSimiliar(jsonData03.results);
+    setTimeout(() => setLoading(false), 600);
 
     const data04 = await fetch(apiTrailer, options);
     const jsonData04 = await data04.json();
@@ -78,6 +82,9 @@ export const MovieDetails = () => {
 
   const stars = credits?.cast?.slice(0, 3);
 
+  if (loading) {
+    return <MovieDetailLoading />;
+  }
   return (
     <div className="m-auto flex flex-col items-center ">
       <div className=" flex flex-col w-[1080px]  gap-6">
@@ -126,9 +133,9 @@ export const MovieDetails = () => {
               src={`https://image.tmdb.org/t/p/original${movieDetail.backdrop_path}`}
               alt={movieDetail.title}
             ></img>
-            <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-100 ">
+            <div className="absolute w-full h-full bg-gradient-to-t from-black via-transparent to-transparent opacity-100 rounded-b-lg ">
               <div className="flex items-end p-6 h-full">
-                <div className="items-center flex gap-4">
+                <div className="items-center flex gap-4 hover:scale-110">
                   <button
                     onClick={() => setShowTrailer(true)}
                     className="w-10 h-10 rounded-full bg-white items-center justify-center flex cursor-pointer "
@@ -176,7 +183,7 @@ export const MovieDetails = () => {
               return (
                 <div
                   key={genres.id}
-                  className=" h-[20px] p-2 rounded-full border flex items-center justify-center border-[#E4E4E7] font-semibold text-xs cursor-pointer"
+                  className=" h-[20px] p-2 rounded-full border flex items-center justify-center border-[#E4E4E7] font-semibold text-xs "
                 >
                   {genres.name}
                 </div>

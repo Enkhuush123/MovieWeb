@@ -6,6 +6,7 @@ import { Star } from "../_Icons/StarIcon";
 import { useParams } from "next/navigation";
 import { MovieCard } from "../_components/MovieCard";
 import { Genre } from "../_components/GenreCard";
+import { SearchPopLoading } from "../_components/SearchPopLoading";
 const options = {
   method: "GET",
   headers: {
@@ -21,6 +22,7 @@ export const SearchPop = () => {
   const [searchResult, setSearchResult] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [loading, setLoading] = useState(false);
   console.log(searchResultsMovie, "search");
   const params = useParams();
 
@@ -30,6 +32,7 @@ export const SearchPop = () => {
   const apiGenre = `https://api.themoviedb.org/3/genre/movie/list?language=en`;
 
   const getData = async (page = 1) => {
+    setLoading(true);
     const data01 = await fetch(apiGenre, options);
     const jsonData01 = await data01.json();
     setGenreList(jsonData01.genres);
@@ -40,6 +43,7 @@ export const SearchPop = () => {
 
     setTotalPages(Math.min(jsonData.total_pages, 50));
     setCurrentPage(page);
+    setTimeout(() => setLoading(false), 600);
   };
 
   useEffect(() => {
@@ -84,6 +88,10 @@ export const SearchPop = () => {
     }
   };
 
+  if (loading) {
+    return <SearchPopLoading />;
+  }
+
   return (
     <div className=" flex flex-col gap-8">
       <div className="pl-20">
@@ -91,14 +99,14 @@ export const SearchPop = () => {
       </div>
       <div className="w-[1440px] pr-20 pl-20 flex flex-row gap-8">
         <div className="flex flex-col gap-7">
-          <div className="flex gap-8 flex-col">
+          <div className="flex  flex-col">
             <div>
               <p>
                 {searchResult} results for &quot;{id}&quot;
               </p>
             </div>
             <div className="flex flex-wrap gap-8">
-              {searchResultsMovie.slice(0, 10).map((movie) => {
+              {searchResultsMovie.slice(0, 9).map((movie) => {
                 return (
                   <MovieCard
                     key={movie.id}

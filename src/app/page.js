@@ -1,7 +1,5 @@
 "use client ";
 
-import "./index.css";
-
 import { HeroSectionList } from "./_components/HeroSectionSlider";
 import { PopularMovieSlide } from "./_components/PopularMovieSlider";
 import { TopRatedMovieSlider } from "./_components/TopRatedMovieSlider";
@@ -11,7 +9,7 @@ import { Header } from "./_feature/Header";
 
 export default function Home() {
   return (
-    <div className="flex flex-col w-[1440px] m-auto shadow-xs border-[#E4E4E7] gap-13   ">
+    <div className="flex flex-col w-[1440px] m-auto shadow-xs border-[#E4E4E7] gap-13 bg-white   ">
       {/* {ImgUrl.map((item, key) => {
         return <Header key={key} />;
       })} */}

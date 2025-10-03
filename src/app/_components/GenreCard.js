@@ -13,7 +13,7 @@ export const Genre = (props) => {
   return (
     <button
       onClick={handleGenreClick}
-      className=" h-[25px] p-2 flex items-center gap-2 border border-border justify-center rounded-full font-semibold text-xs cursor-pointer hover:bg-black hover:text-white "
+      className=" h-[25px] p-2 flex items-center gap-2 border border-border justify-center rounded-full font-semibold text-xs cursor-pointer hover:bg-black hover:text-white hover:scale-120 "
     >
       {name} <RightButton />
     </button>

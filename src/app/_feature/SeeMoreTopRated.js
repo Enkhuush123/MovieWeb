@@ -5,6 +5,7 @@ import { MovieCard } from "../_components/MovieCard";
 import { useEffect, useState } from "react";
 import { LeftArrow } from "../_Icons/LeftArrowIcon";
 import { RightButton } from "../_Icons/RightIcon";
+import { Loading } from "../_components/Loading";
 
 export const SeeMoreTopRated = () => {
   const apiBase = "https://api.themoviedb.org/3/movie/top_rated?language=en-US";
@@ -19,13 +20,16 @@ export const SeeMoreTopRated = () => {
   const [SeeMoreTopRatedMovies, setSeeMoreTopRatedMovies] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [loading, setLoading] = useState(false);
 
   const getData = async (page = 1) => {
+    setLoading(true);
     const data = await fetch(`${apiBase}&page=${page}`, options);
     const jsonData = await data.json();
     setTotalPages(Math.min(jsonData.total_pages, 50));
     setSeeMoreTopRatedMovies(jsonData.results);
     setCurrentPage(page);
+    setTimeout(() => setLoading(false), 600);
   };
   console.log(SeeMoreTopRated, "haha");
 
@@ -70,6 +74,10 @@ export const SeeMoreTopRated = () => {
       getData(currentPage + 1);
     }
   };
+
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
     <div className="flex flex-col w-[1440px] m-auto gap-10">

@@ -5,6 +5,7 @@ import { MovieCard } from "../_components/MovieCard";
 import { use, useEffect, useState } from "react";
 import { LeftArrow } from "../_Icons/LeftArrowIcon";
 import { RightButton } from "../_Icons/RightIcon";
+import { Loading } from "../_components/Loading";
 
 export const PopularShowMore = () => {
   const apiBase = "https://api.themoviedb.org/3/movie/popular?language=en-US";
@@ -31,7 +32,7 @@ export const PopularShowMore = () => {
     setTotalPages(Math.min(jsonData.total_pages, 50));
     setPopularShowMore(jsonData.results);
     setCurrentPage(page);
-    setLoading(false);
+    setTimeout(() => setLoading(false), 600);
   };
 
   useEffect(() => {
@@ -75,6 +76,10 @@ export const PopularShowMore = () => {
       getData(currentPage + 1);
     }
   };
+
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
     <div className="flex flex-col w-[1440px] m-auto gap-10">
