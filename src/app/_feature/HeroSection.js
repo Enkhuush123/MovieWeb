@@ -5,19 +5,54 @@ import { Watch } from "../_Icons/WatchIcon";
 import { RightButton } from "../_Icons/RightIcon";
 
 import { LeftArrow } from "../_Icons/LeftArrowIcon";
+import { useEffect, useState } from "react";
+import { useParams } from "next/navigation";
+
+const options = {
+  method: "GET",
+  headers: {
+    accept: "application/json",
+    Authorization:
+      "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4NzZiMzEwNzJlZDg5ODcwMzQxM2Y0NzkyYzZjZTdjYyIsIm5iZiI6MTczODAyNjY5NS44NCwic3ViIjoiNjc5ODJlYzc3MDJmNDkyZjQ3OGY2OGUwIiwic2NvcGVzIjpbImFwaV9yZWFkIl0sInZlcnNpb24iOjF9.k4OF9yGrhA2gZ4VKCH7KLnNBB2LIf1Quo9c3lGF6toE",
+  },
+};
 
 export const HeroSectionSlide = (props) => {
-  const { img, title, overview, rate, onNext, onPrev, showPrev, showNext } =
-    props;
+  const [trailer, setTrailer] = useState([]);
+
+  // const params = useParams();
+
+  // const { id } = params;
+
+  const { img, title, overview, rate, movieId, onWatch } = props;
+  const apiTrailer = `https://api.themoviedb.org/3/movie/${movieId}/videos?language=en-US`;
+
+  const getData = async () => {
+    const data = await fetch(apiTrailer, options);
+    const jsonData = await data.json();
+    const Trailer =
+      jsonData.results.find(
+        (trail) => trail.type === "Trailer" && trail.site === "YouTube"
+      ) ||
+      jsonData.results.find(
+        (trail) => trail.type === "Teaser" && trail.site === "YouTube"
+      );
+    setTrailer(Trailer);
+    console.log(jsonData, "Trailer");
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
 
   return (
-    <div className="pt-6 w-full h-[700px] relative flex justify-between  ">
+    <div className="max-sm:w-full">
       <img
         src={`https://image.tmdb.org/t/p/original${img}`}
-        className="w-full h-full absolute -z-10 object-cover inset-0"
+        className="w-full h-full absolute -z-10 object-cover inset-0 max-sm:w-[375px]"
       ></img>
 
-      <div className="flex  ">
+      <div className="flex max-sm:bottom-5  ">
         <div className="text-white flex flex-col gap-4 pt-[178px] pl-[140px] w-[650px] h-full ">
           <div>
             <div>
@@ -38,7 +73,10 @@ export const HeroSectionSlide = (props) => {
           </div>
 
           <div>
-            <button className=" w-[145px] h-[40px] bg-white text-black rounded-lg flex items-center justify-center gap-2 hover:opacity-70 transition duration-300 cursor-pointer relative z-50  ">
+            <button
+              onClick={() => onWatch(trailer)}
+              className=" w-[145px] h-[40px] bg-white text-black rounded-lg flex items-center justify-center gap-2 hover:opacity-70 transition duration-300 cursor-pointer relative  "
+            >
               <Watch />
               Watch Trailer
             </button>

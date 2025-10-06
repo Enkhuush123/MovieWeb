@@ -14,7 +14,7 @@ export const MovieCard = (props) => {
   };
   return (
     <div
-      className={`w-[229.73px]  flex flex-col   pt-[32px] rounded-lg cursor-pointer hover:scale-110`}
+      className={`w-[229.73px]  flex flex-col   pt-[32px] rounded-lg cursor-pointer hover:scale-110 max-sm:w-[157px] max-sm:-h[309px] `}
       onClick={HandleMovieDetailClick}
     >
       <div className="w=full aspect-[2/3] overflow-hidden rounded-t-lg hover:opacity-[0.5]">

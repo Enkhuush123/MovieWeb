@@ -151,12 +151,12 @@ export const MovieDetails = () => {
           </div>
         </div>
         {showTrailer && trailer && (
-          <div className="bg-black fixed inset-0 bg-opacity-50 flex justify-center items-center ">
+          <div className="bg-black/90 fixed inset-0 bg-opacity-100 flex justify-center items-center  ">
             <div>
               {trailer ? (
                 <iframe
-                  width="1639"
-                  height="922"
+                  width="1280"
+                  height="720"
                   src={`https://www.youtube.com/embed/${trailer.key}`}
                   title="title"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -166,13 +166,13 @@ export const MovieDetails = () => {
                 <div>No Teaser available</div>
               )}
             </div>
-            <div className="absolute bg-black top-10 right-80 rounded-lg justify-center items-center ">
-              <button
+            <div className="absolute top-30 right-100  justify-center items-center hover:scale-120 ">
+              <h1
                 onClick={() => setShowTrailer(false)}
-                className="text-white cursor-pointer"
+                className="text-white cursor-pointer font-bold  text-4xl"
               >
-                X Close
-              </button>
+                X
+              </h1>
             </div>
           </div>
         )}

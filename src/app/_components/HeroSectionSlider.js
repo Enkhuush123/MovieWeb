@@ -22,6 +22,7 @@ export const HeroSectionList = () => {
   const [headerMovie, setHeaderMovie] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [loading, setLoading] = useState(false);
+  const [showTrailer, setShowTrailer] = useState(null);
 
   const getData = async () => {
     setLoading(true);
@@ -54,16 +55,16 @@ export const HeroSectionList = () => {
   }
 
   return (
-    <div className=" relative h-[full] w-full overflow-hidden">
+    <div className=" relative h-full w-full overflow-hidden max-sm:w-[375px]">
       <div
-        className="flex transition-transform duration-700 ease-in-out"
+        className="flex transition-transform duration-700 ease-in-out max-sm:w-[375px]"
         style={{
           transform: `translateX(-${currentIndex * 100}%)`,
         }}
       >
         {headerMovie.map((movie) => (
           <div
-            className="w-[1440px] h-[700px] flex-shrink-0 relative"
+            className="w-[1440px] h-[700px] flex-shrink-0 relative max-sm:w-[375px] max-sm:h-[246px] "
             key={movie.id}
           >
             <HeroSectionSlide
@@ -74,50 +75,73 @@ export const HeroSectionList = () => {
               onPrev={prev}
               onNext={next}
               movieId={movie.id}
+              onWatch={(trailer) => setShowTrailer(trailer)}
             />
           </div>
         ))}
       </div>
-
-      <div className="absolute inset-0 flex items-center justify-between px-10 z-20">
+      <div className="absolute inset-0 flex items-center justify-between px-10 z-20 pointer-events-none">
         <div>
           {currentIndex > 0 && (
             <button
               onClick={prev}
-              className="w-10 h-10 bg-white rounded-full flex justify-center items-center cursor-pointer "
+              className="w-10 h-10 bg-white rounded-full flex justify-center items-center cursor-pointer pointer-events-auto "
             >
               <LeftArrow />
             </button>
           )}
         </div>
-        {/* <div>
-          <button className="  w-[145px] h-[40px] bg-white text-black rounded-lg flex items-center justify-center gap-2 hover:opacity-70 transition duration-300 cursor-pointer relative z-50  ">
-            <Watch />
-            Watch Trailer
-          </button>
-        </div> */}
+
         <div>
           {currentIndex < headerMovie.length - 1 && (
             <button
               onClick={next}
-              className="w-10 h-10 bg-white rounded-full flex justify-center items-center cursor-pointer "
+              className="w-10 h-10 bg-white rounded-full flex justify-center items-center cursor-pointer pointer-events-auto "
             >
               <RightButton />
             </button>
           )}
         </div>
       </div>
-      {/* <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2 z-50">
+      <div className="absolute bottom-15 left-1/2 -translate-x-1/2 flex gap-2 ">
         {headerMovie.map((movie, idx) => (
           <button
             key={movie.id}
             onClick={() => setCurrentIndex(idx)}
             className={`w-2 h-2 rounded-full ${
-              idx === currentIndex ? "bg-white" : "bg-white/40"
+              idx === currentIndex
+                ? "bg-white"
+                : "bg-white/40 pointer-events-auto"
             }`}
           ></button>
         ))}
-      </div> */}
+      </div>
+      {showTrailer && (
+        <div className="bg-black/90 fixed inset-0 bg-opacity-100 flex justify-center  items-center   ">
+          <iframe
+            width="1280"
+            height="720"
+            src={`https://www.youtube.com/embed/${showTrailer.key}`}
+            title="title"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowFullScreen
+          ></iframe>
+          <h1
+            onClick={() => setShowTrailer(false)}
+            className="text-white cursor-pointer font-bold text-4xl absolute top-30 right-100 hover:scale-120"
+          >
+            X
+          </h1>
+        </div>
+      )}
+      <div className="max-sm:block sm:hidden">
+        <div>
+          <div>
+            <p>Now Playing</p>
+            <h1 className="text-black">{headerMovie.title}</h1>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

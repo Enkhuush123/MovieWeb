@@ -9,7 +9,7 @@ import { Header } from "./_feature/Header";
 
 export default function Home() {
   return (
-    <div className="flex flex-col w-[1440px] m-auto shadow-xs border-[#E4E4E7] gap-13 bg-white   ">
+    <div className="flex flex-col w-[1440px] m-auto shadow-xs border-[#E4E4E7] gap-13 bg-white max-sm:w-full   ">
       {/* {ImgUrl.map((item, key) => {
         return <Header key={key} />;
       })} */}
@@ -18,7 +18,7 @@ export default function Home() {
       <UpComingMovieSlide />
       <PopularMovieSlide />
       <TopRatedMovieSlider />
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }

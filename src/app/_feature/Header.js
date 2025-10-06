@@ -62,29 +62,28 @@ export const Header = ({}) => {
   }, []);
 
   return (
-    <div className="flex  flex-row justify-between items-center pl-20 pt-3 pr-20 ">
+    <div className="flex  flex-row  justify-between items-center sm:px-20 pl-20 pt-3 pr-20 ">
       <div
         onClick={() => router.push("/")}
         className="flex items-center  gap-2 cursor-pointer hover:scale-110"
       >
         <FilmIconPurple />
-        <p className="text-indigo-700 font-bold text-base ">Movie Z</p>
+        <p className="text-indigo-700 font-bold text-base sm-text-lg ">
+          Movie Z
+        </p>
       </div>
 
       <div className="flex items-center gap-8 ">
-        <div className="flex items-center border border-[#E4E4E7] w-[97px] h-[36px] rounded-lg gap-2 justify-center font-medium text-sm hover:scale-110">
-          <div className="flex items-center gap-2 cursor-pointer relative ">
+        <div className=" max-sm:hidden flex items-center border border-[#E4E4E7] w-[97px] h-[36px] rounded-lg gap-2 justify-center font-medium text-sm hover:scale-103 z-50">
+          <div
+            className="flex items-center gap-2 cursor-pointer relative   "
+            onClick={() => setOpenGenres(!openGenres)}
+          >
             <FaChevronDown className="opactiy-50 w-[14px] h-[10px]" />
-            <button
-              className="cursor-pointer"
-              onClick={() => setOpenGenres(!openGenres)}
-            >
-              {" "}
-              Genre
-            </button>
+            Genre
           </div>
           {openGenres && (
-            <div className="absolute w-[577px] bg-white mt-95 ml-120 flex flex-col flex-wrap p-5 gap-5 shadow-xs rounded-lg border border-[#E4E4E7] z-50 ">
+            <div className="absolute w-[577px] bg-white  mt-95 ml-120 flex flex-col flex-wrap p-5 gap-5 shadow-xs rounded-lg border border-[#E4E4E7] z-50 ">
               <div className="flex flex-col gap-2">
                 <h3 className="font-semibold text-2xl">Genres</h3>
                 <p>See lists of movies by genre</p>
@@ -106,7 +105,7 @@ export const Header = ({}) => {
           )}
         </div>
         <div
-          className="flex items-center gap-2   w-[379px] h-[36px] rounded-lg p-3 border border-[#E4E4E7] hover:scale-110 ]
+          className="max-sm:hidden flex items-center gap-2   w-[379px] h-[36px] rounded-lg p-3 border border-[#E4E4E7] hover:scale-105 z-50 ]
                 "
         >
           <FaSearch className="opacity-50 w-[11px] h-[11px] " />
@@ -123,7 +122,7 @@ export const Header = ({}) => {
                 return (
                   <div
                     onClick={() => router.push(`/movie-detail/${movie.id}`)}
-                    className="w-[553px] h-[116px] flex gap-3 hover:bg-black hover:text-white p-2 border-b border-gray-300 hover:scale-110 cursor-pointer "
+                    className="w-[553px] h-[116px] flex gap-3 hover:bg-black hover:text-white p-2 border-b border-gray-300  cursor-pointer z-50 "
                     key={movie.id}
                     title={movie.title}
                   >
