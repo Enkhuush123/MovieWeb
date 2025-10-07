@@ -5,9 +5,9 @@ import { PhoneIcon } from "../_Icons/PhoneIcon";
 export const Footer = () => {
   return (
     <div>
-      <div className="w-full h-[280px] bg-indigo-700 ">
-        <div className="flex justify-between pt-[40px] pr-[80px] pl-[80px]  ">
-          <div className="flex  flex-col">
+      <div className="w-full h-[280px] bg-indigo-700 max-sm:w-full max-sm:flex max-sm:gap- max-sm:h-[308px] ">
+        <div className="flex justify-between pt-[40px] pr-[80px] pl-[80px] max-sm:w-full max-sm:p-5 max-sm:flex-col   ">
+          <div className="flex  flex-col ">
             <div className="flex items-center gap-2">
               <FilmIcon />
 
@@ -19,7 +19,7 @@ export const Footer = () => {
               </p>
             </div>
           </div>
-          <div className="flex gap-[96px]">
+          <div className="flex gap-[96px] max-sm:gap-12 max-sm:justify-between">
             <div className="flex flex-col gap-3">
               <div>
                 <p className="text-white">Contact Information</p>
@@ -53,7 +53,7 @@ export const Footer = () => {
               <div>
                 <p>Follow us</p>
               </div>
-              <div className="flex gap-3 ">
+              <div className="flex gap-3 max-sm:flex-col ">
                 <p>Facebook</p>
                 <p>Instagram</p>
                 <p>Twitter</p>

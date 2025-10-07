@@ -11,6 +11,7 @@ import { SearchPop } from "./SearchPopUp";
 import { Star } from "../_Icons/StarIcon";
 import { RightButton } from "../_Icons/RightIcon";
 import { useRouter } from "next/navigation";
+import { SearchIcon } from "../_Icons/SearchIcon";
 
 export const Header = ({}) => {
   const [openGenres, setOpenGenres] = useState(false);
@@ -62,7 +63,7 @@ export const Header = ({}) => {
   }, []);
 
   return (
-    <div className="flex  flex-row  justify-between items-center sm:px-20 pl-20 pt-3 pr-20 ">
+    <div className="flex  max-sm:pl-5  flex-row  justify-between items-center sm:px-20 pl-20 pt-3 pr-20 ">
       <div
         onClick={() => router.push("/")}
         className="flex items-center  gap-2 cursor-pointer hover:scale-110"
@@ -105,17 +106,21 @@ export const Header = ({}) => {
           )}
         </div>
         <div
-          className="max-sm:hidden flex items-center gap-2   w-[379px] h-[36px] rounded-lg p-3 border border-[#E4E4E7] hover:scale-105 z-50 ]
+          className=" flex items-center gap-2 max-sm:flex max-sm:gap-5 max-sm:w-9 max-sm:h-9  w-[379px] h-[36px] rounded-lg p-3 border border-[#E4E4E7]  z-50 ]
                 "
         >
-          <FaSearch className="opacity-50 w-[11px] h-[11px] " />
-          <input
-            value={searchInput}
-            onChange={searchHandle}
-            className="pl-2 outline-none w-[379px] "
-            type="search"
-            placeholder="Search"
-          ></input>
+          <div className=" w-[11px] h-[11px] flex items-center ">
+            <SearchIcon />
+          </div>
+          <div className="max-sm:hidden w-[379px]">
+            <input
+              value={searchInput}
+              onChange={searchHandle}
+              className="pl-2 outline-none w-[340px] "
+              type="search"
+              placeholder="Search"
+            ></input>
+          </div>
           {searchResults.length > 0 && (
             <div className="w-[577px] h-auto bg-white absolute top-20 z-50 flex flex-col gap-0 ">
               {searchResults.slice(0, 5).map((movie) => {
@@ -158,12 +163,12 @@ export const Header = ({}) => {
               </div>
             </div>
           )}
+          <div>
+            <button className=" rounded-lg w-[36px] h-[36px] border border-[#E4E4E7] flex items-center justify-center">
+              <MoonIcon />
+            </button>
+          </div>
         </div>
-      </div>
-      <div>
-        <button className=" rounded-lg w-[36px] h-[36px] border border-[#E4E4E7] flex items-center justify-center">
-          <MoonIcon />
-        </button>
       </div>
     </div>
   );

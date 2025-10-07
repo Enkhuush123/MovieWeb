@@ -41,8 +41,8 @@ export const PopularMovieSlide = () => {
   }
 
   return (
-    <div className="flex gap-[52px] ">
-      <div className="flex flex-col pl-[80px] pr-[80px] ">
+    <div className="flex gap-[52px] max-sm:w-full ">
+      <div className="flex flex-col pl-[80px] pr-[80px] max-sm:p-5 ">
         <div className="flex flex-row justify-between pt-[52px] w-full">
           <div>
             <h3 className="font-semibold text-2xl">Popular</h3>

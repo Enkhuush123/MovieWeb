@@ -46,41 +46,40 @@ export const HeroSectionSlide = (props) => {
   }, []);
 
   return (
-    <div className="max-sm:w-full">
-      <img
-        src={`https://image.tmdb.org/t/p/original${img}`}
-        className="w-full h-full absolute -z-10 object-cover inset-0 max-sm:w-[375px]"
-      ></img>
-
-      <div className="flex max-sm:bottom-5  ">
-        <div className="text-white flex flex-col gap-4 pt-[178px] pl-[140px] w-[650px] h-full ">
+    <div className="max-sm:w-full max-sm:flex max-sm:flex-col max-sm:items-center">
+      <div className="relative w-full h-[700px]  max-sm:w-full max-sm:h-full">
+        <img
+          src={`https://image.tmdb.org/t/p/original${img}`}
+          className="w-full max-sm:w-full h-full max-sm:h-[246px]  object-cover max-sm:relative"
+        ></img>
+      </div>
+      <div className="text-white flex-col gap-4 pt-[178px] pl-[140px] w-[650px] h-full absolute inset-0 hidden md:flex  ">
+        <div>
           <div>
-            <div>
-              <p>Now Playing:</p>
-            </div>
-
-            <div className="font-bold text-4xl">
-              <h1>{title}</h1>
-            </div>
-          </div>
-          <div className="flex items-center gap-1">
-            <Star /> {rate}
-            <span className="text-xs text-gray-500">/10</span>
+            <p>Now Playing:</p>
           </div>
 
-          <div>
-            <p className="text-[14px] ">{overview}</p>
+          <div className="font-bold text-4xl">
+            <h1>{title}</h1>
           </div>
+        </div>
+        <div className="flex items-center gap-1">
+          <Star /> {rate}
+          <span className="text-xs text-gray-500">/10</span>
+        </div>
 
-          <div>
-            <button
-              onClick={() => onWatch(trailer)}
-              className=" w-[145px] h-[40px] bg-white text-black rounded-lg flex items-center justify-center gap-2 hover:opacity-70 transition duration-300 cursor-pointer relative  "
-            >
-              <Watch />
-              Watch Trailer
-            </button>
-          </div>
+        <div>
+          <p className="text-[14px] ">{overview}</p>
+        </div>
+
+        <div>
+          <button
+            onClick={() => onWatch(trailer)}
+            className=" w-[145px] h-[40px] bg-white text-black rounded-lg flex items-center justify-center gap-2 hover:opacity-70 transition duration-300 cursor-pointer relative  "
+          >
+            <Watch />
+            Watch Trailer
+          </button>
         </div>
       </div>
     </div>
