@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { Genre } from "../_components/GenreCard";
 import { useParams } from "next/navigation";
 import { MovieCard } from "../_components/MovieCard";
+import { GenreLoading } from "../_components/GenreDetailLoading";
 
 const options = {
   method: "GET",
@@ -17,9 +18,10 @@ const options = {
 export const GenreStyle = () => {
   const [genreList, setGenreList] = useState([]);
   const [genreMovies, setGenreMovies] = useState([]);
-  const [totalResults, setTotalResults] = useState([0]);
+  const [totalResults, setTotalResults] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [loading, setLoading] = useState(false)
 
   const param = useParams();
   const { id } = param;
@@ -28,6 +30,7 @@ export const GenreStyle = () => {
 
   console.log(id, "genre");
   const getData = async (page = 1) => {
+    setLoading(true)
     const data = await fetch(apiGenre, options);
     const jsonData = await data.json();
     setGenreList(jsonData.genres);
@@ -35,12 +38,7 @@ export const GenreStyle = () => {
 
     console.log(apiGenreList, "genrei");
 
-    // const data01 = await fetch(apiGenreList, options);
-    // const jsonData01 = await data01.json();
-    // setGenreMovies(jsonData01.results);
-    // setTotalResults(jsonData01.total_results);
-    // console.log(jsonData01, "genre1");
-
+ 
     const data02 = await fetch(`${apiGenreList}&page=${page}`, options);
     const jsonData02 = await data02.json();
     setGenreMovies(jsonData02.results);
@@ -48,11 +46,16 @@ export const GenreStyle = () => {
     setTotalResults(jsonData02.total_results);
     setCurrentPage(page);
     console.log(genreMovies, "moive");
+    setTimeout(()=> setLoading(false), 600)
   };
 
   useEffect(() => {
     getData();
   }, [id]);
+
+  if (loading) {
+    return (<GenreLoading/>)
+  }
 
   const getPagination = () => {
     const pages = [];
