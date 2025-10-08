@@ -18,6 +18,7 @@ export const Header = ({}) => {
   const [genreList, setGenreList] = useState([]);
   const [searchInput, setSearchInput] = useState("");
   const [searchResults, setSearchResults] = useState([]);
+  const [mobileSearch, setMobileSearch] = useState(false);
 
   const apiLink = "https://api.themoviedb.org/3/genre/movie/list?language=en";
   const router = useRouter();
@@ -66,15 +67,23 @@ export const Header = ({}) => {
     <div className="flex  max-sm:pl-5  flex-row  justify-between items-center sm:px-20 pl-20 pt-3 pr-20 ">
       <div
         onClick={() => router.push("/")}
-        className="flex items-center  gap-2 cursor-pointer hover:scale-110"
+        className={`flex items-center  gap-2 cursor-pointer hover:scale-110 transition max-sm:w-full ${
+          mobileSearch ? "hidden" : "flex"
+        }`}
       >
         <FilmIconPurple />
         <p className="text-indigo-700 font-bold text-base sm-text-lg ">
           Movie Z
         </p>
       </div>
-
-      <div className="flex items-center gap-8 ">
+      <div className="flex items-center gap-8 max-sm:w-full max-sm:gap-2 ">
+        <button
+          className={`opacity-0 transition w-9 h-9 border border-gray-300 rounded-lg flex justify-center items-center ${
+            mobileSearch ? "opacity-100" : "opacity-0"
+          }`}
+        >
+          <FaChevronDown className="opactiy-50 w-[14px] h-[10px]" />{" "}
+        </button>
         <div className=" max-sm:hidden flex items-center border border-[#E4E4E7] w-[97px] h-[36px] rounded-lg gap-2 justify-center font-medium text-sm hover:scale-103 z-50">
           <div
             className="flex items-center gap-2 cursor-pointer relative   "
@@ -106,28 +115,36 @@ export const Header = ({}) => {
           )}
         </div>
         <div
-          className=" flex items-center gap-2 max-sm:flex max-sm:gap-5 max-sm:w-9 max-sm:h-9  w-[379px] h-[36px] rounded-lg p-3 border border-[#E4E4E7]  z-50 ]
+          className=" flex items-center  gap-2 max-sm:flex max-sm:gap-0 max-sm:w-9 max-sm:h-9  w-[379px] h-[36px] rounded-lg p-3 border border-[#E4E4E7] max-sm:justify-center  z-50 ]
                 "
         >
-          <div className=" w-[11px] h-[11px] flex items-center ">
+          <div className=" w-[11px] h-[11px]   ">
+            <button
+              className="hidden max-sm:flex "
+              onClick={() => setMobileSearch(!mobileSearch)}
+            >
+              <SearchIcon />
+            </button>
+          </div>
+          <div className=" w-[11px] h-[11px] flex items-center max-sm:hidden ">
             <SearchIcon />
           </div>
-          <div className="max-sm:hidden w-[379px]">
+          <div className="max-sm:hidden w-[379px]  ">
             <input
               value={searchInput}
               onChange={searchHandle}
-              className="pl-2 outline-none w-[340px] "
+              className="pl-2 outline-none w-[335px] "
               type="search"
               placeholder="Search"
             ></input>
           </div>
           {searchResults.length > 0 && (
-            <div className="w-[577px] h-auto bg-white absolute top-20 z-50 flex flex-col gap-0 ">
+            <div className="w-[537px] h-auto bg-white absolute max-sm:w-[335px] max-sm:absolute max-sm:left-[20px] flex justify-center items-center flex-col top-20 ">
               {searchResults.slice(0, 5).map((movie) => {
                 return (
                   <div
                     onClick={() => router.push(`/movie-detail/${movie.id}`)}
-                    className="w-[553px] h-[116px] flex gap-3 hover:bg-black hover:text-white p-2 border-b border-gray-300  cursor-pointer z-50 "
+                    className="w-[537px] h-[116px] flex gap-3 hover:bg-black hover:text-white p-2 border-b border-gray-300  cursor-pointer z-50 max-sm:w-full  "
                     key={movie.id}
                     title={movie.title}
                   >
@@ -163,13 +180,28 @@ export const Header = ({}) => {
               </div>
             </div>
           )}
-          <div>
-            <button className=" rounded-lg w-[36px] h-[36px] border border-[#E4E4E7] flex items-center justify-center">
-              <MoonIcon />
-            </button>
-          </div>
         </div>
+      </div>{" "}
+      <div>
+        <button
+          className={` rounded-lg w-[36px] h-[36px] border border-[#E4E4E7] flex items-center justify-center transition ${
+            mobileSearch ? "hidden " : "flex"
+          }`}
+        >
+          <MoonIcon />
+        </button>
       </div>
+      {mobileSearch && (
+        <div className=" max-sm:w-full hidden max-sm:flex absolute left-25 ">
+          <input
+            value={searchInput}
+            onChange={searchHandle}
+            className="pl-2 outline-none max-sm:w-full "
+            type="search"
+            placeholder="Search"
+          ></input>
+        </div>
+      )}
     </div>
   );
 };

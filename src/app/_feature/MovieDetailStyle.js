@@ -86,10 +86,10 @@ export const MovieDetails = () => {
     return <MovieDetailLoading />;
   }
   return (
-    <div className="m-auto flex flex-col items-center ">
-      <div className=" flex flex-col w-[1080px]  gap-6">
-        <div className="flex justify-between">
-          <div className="flex flex-col ">
+    <div className="m-auto flex flex-col items-center max-sm:w-full gap-8  ">
+      <div className=" flex flex-col w-[1080px]  gap-6 max-sm:w-full   ">
+        <div className="flex justify-between max-sm:p-5 ">
+          <div className="flex flex-col gap-1 ">
             <div>
               <h1 className="font-bold text-4xl">{movieDetail.title}</h1>
             </div>
@@ -116,25 +116,17 @@ export const MovieDetails = () => {
           </div>
         </div>
         <div
-          className="flex flex-row gap-8 w-[1080px] h-[428px]
+          className="flex flex-row gap-8 w-[1080px] h-[428px] max-sm:w-full max-sm:flex-col max-sm:h-[283px]
       "
         >
-          <div className="w-[290px] h-[428px] ">
+          <div className="w-[760px] h-[428px] relative max-sm:w-full max-sm:h-[283px] object-cover  ">
             <img
-              className=" w-[290px] h-[428px] rounded-lg"
-              src={`https://image.tmdb.org/t/p/original${movieDetail.poster_path}`}
-              alt={movieDetail.title}
-            ></img>
-          </div>
-
-          <div className="w-[760px] h-[428px] relative ">
-            <img
-              className="w-[760px] h-[428px] rounded-lg absolute -z-10"
+              className="w-[760px] h-[428px] rounded-lg absolute -z-10 max-sm:flex max-sm:relative max-sm:w-full max-sm:h-[283px] object-cover max-sm:rounded-none"
               src={`https://image.tmdb.org/t/p/original${movieDetail.backdrop_path}`}
               alt={movieDetail.title}
             ></img>
-            <div className="absolute w-full h-full bg-gradient-to-t from-black via-transparent to-transparent opacity-100 rounded-b-lg ">
-              <div className="flex items-end p-6 h-full">
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-100 rounded-b-lg  ">
+              <div className="flex items-end p-6  justify-start absolute inset-0">
                 <div className="items-center flex gap-4 hover:scale-110">
                   <button
                     onClick={() => setShowTrailer(true)}
@@ -149,56 +141,52 @@ export const MovieDetails = () => {
               </div>
             </div>
           </div>
+          <div className="w-[290px] h-[428px] max-sm:w-full max-sm:h-full object-cover max-sm:hidden  ">
+            <img
+              className=" w-[290px] h-[428px] rounded-lg max-sm:w-[100px] max-sm:h-[148px] object-cover"
+              src={`https://image.tmdb.org/t/p/original${movieDetail.poster_path}`}
+              alt={movieDetail.title}
+            ></img>
+          </div>
         </div>
-        {showTrailer && trailer && (
-          <div className="bg-black/90 fixed inset-0 bg-opacity-100 flex justify-center items-center  ">
-            <div>
-              {trailer ? (
-                <iframe
-                  width="1280"
-                  height="720"
-                  src={`https://www.youtube.com/embed/${trailer.key}`}
-                  title="title"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  allowFullScreen
-                ></iframe>
-              ) : (
-                <div>No Teaser available</div>
-              )}
-            </div>
-            <div className="absolute top-30 right-100  justify-center items-center hover:scale-120 ">
-              <h1
-                onClick={() => setShowTrailer(false)}
-                className="text-white cursor-pointer font-bold  text-4xl"
-              >
-                X
-              </h1>
-            </div>
+      </div>
+      <div className="flex gap-5 flex-col max-sm:p-5 w-[1080px] max-sm:w-full">
+        <div className="flex flex-col gap-3 max-sm:flex-row max-sm:w-full">
+          <div className="w-[290px] h-[428px] max-sm:w-full max-sm:h-full hidden max-sm:flex    ">
+            <img
+              className=" w-[290px] h-[428px] rounded-lg max-sm:w-full max-sm:h-[148px] max-sm:rounded-none  "
+              src={`https://image.tmdb.org/t/p/original${movieDetail.poster_path}`}
+              alt={movieDetail.title}
+            ></img>
           </div>
-        )}
+          <div className="max-sm:flex max-sm:flex-wrap flex flex-col gap-2">
+            <div className="flex flex-row gap-3  max-sm:flex-row ">
+              {movieDetail.genres?.map((genres) => {
+                return (
+                  <div
+                    key={genres.id}
+                    className=" h-[20px] p-2 rounded-full border flex items-center justify-center border-[#E4E4E7] font-semibold text-xs "
+                  >
+                    {genres.name}
+                  </div>
+                );
+              })}
+            </div>
 
-        <div className="flex gap-5 flex-col">
-          <div className="flex flex-row gap-3">
-            {movieDetail.genres?.map((genres) => {
-              return (
-                <div
-                  key={genres.id}
-                  className=" h-[20px] p-2 rounded-full border flex items-center justify-center border-[#E4E4E7] font-semibold text-xs "
-                >
-                  {genres.name}
-                </div>
-              );
-            })}
+            <div className="line-clamp-2 max-sm:h-auto max-sm:line-clamp-none">
+              <p>{movieDetail.overview}</p>
+            </div>
           </div>
-          <div className="line-clamp-2">
-            <p>{movieDetail.overview}</p>
-          </div>
-          <div className="flex gap-12 font-bold text-base">
+        </div>
+        <div className="flex flex-col gap-5 max-sm:p-5">
+          <div className="flex gap-12 font-bold text-base    ">
             Director
-            <p className="font-normal">
+            <p className="font-normal text-justify">
               {director?.map((d) => d.name).join(" , ")}
             </p>
           </div>
+          <div className="border-b border-gray-300"></div>
+
           <div className="flex gap-12 font-bold text-base">
             Writers
             <p className="font-normal">
@@ -206,17 +194,20 @@ export const MovieDetails = () => {
               {writer?.map((w) => w.name).join(" · ")}
             </p>
           </div>
+          <div className="border-b border-gray-300"></div>
           <div className="flex gap-12 font-bold text-base">
             Stars
             <p className="font-normal">
               {stars?.map((s) => s.name).join(" · ")}
             </p>
           </div>
+          <div className="border-b border-gray-300"></div>
         </div>
       </div>
-      <div className="flex gap-[52px] w-[1280px] ">
-        <div>
-          <div className="flex flex-row justify-between pt-[52px]">
+
+      <div className="flex gap-[52px] w-[1280px] max-sm:w-full max-sm:gap-0 ">
+        <div className="flex flex-col  max-sm:p-5">
+          <div className="flex flex-row justify-between  ">
             <h3 className="font-semibold text-2xl">More like this</h3>
 
             <div>
@@ -229,7 +220,7 @@ export const MovieDetails = () => {
             </div>
           </div>
 
-          <div className="flex flex-wrap gap-8">
+          <div className="flex flex-wrap gap-8 max-sm:w-full ">
             {similiar.slice(0, 5).map((movie) => {
               return (
                 <MovieCard
@@ -245,6 +236,33 @@ export const MovieDetails = () => {
           </div>
         </div>
       </div>
+      {showTrailer && trailer && (
+        <div className="bg-black/90 fixed inset-0 bg-opacity-100 flex justify-center items-center  ">
+          <div>
+            {trailer && trailer.key ? (
+              <iframe
+                width="1280"
+                height="720"
+                src={`https://www.youtube.com/embed/${trailer.key}`}
+                title="title"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+                className="max-sm:w-full"
+              ></iframe>
+            ) : (
+              <div>No Teaser available</div>
+            )}
+          </div>
+          <div className="absolute top-30 right-100  justify-center items-center hover:scale-120 ">
+            <h1
+              onClick={() => setShowTrailer(false)}
+              className="text-white cursor-pointer font-bold  text-4xl"
+            >
+              X
+            </h1>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

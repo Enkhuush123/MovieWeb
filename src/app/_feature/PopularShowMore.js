@@ -82,9 +82,9 @@ export const PopularShowMore = () => {
   }
 
   return (
-    <div className="flex flex-col w-[1440px] m-auto gap-10">
-      <div className="flex flex-col pl-[80px] pr-[80px] ">
-        <div className="flex flex-row justify-between pt-[52px]">
+    <div className="flex flex-col w-[1440px] m-auto gap-10 max-sm:w-full">
+      <div className="flex flex-col pl-[80px] pr-[80px] max-sm:p-5 ">
+        <div className="flex flex-row justify-between pt-[52px] max-sm:p-0">
           <h3 className="font-semibold text-2xl">Popular Movies</h3>
         </div>
         <div className="flex flex-wrap gap-8">
@@ -100,7 +100,7 @@ export const PopularShowMore = () => {
           })}
         </div>
       </div>
-      <div className="flex gap-2 w-full h-10 items-end justify-end pr-[80px] ">
+      <div className="flex gap-2 w-full h-10 items-end justify-end pr-[80px] max-sm:justify-center max-sm:items-center max-sm:p-0 max-sm:gap-0 ">
         <button
           onClick={prevPage}
           disabled={currentPage === 1}

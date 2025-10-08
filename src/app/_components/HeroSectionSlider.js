@@ -9,7 +9,7 @@ import MovieDetail from "../movie-detail/[id]/page";
 import { Star } from "../_Icons/StarIcon";
 import { WatchWhite } from "../_Icons/WatchWhiteIcon";
 
-export const HeroSectionList = ({ onWatch }) => {
+export const HeroSectionList = ({ onWatc, trailer }) => {
   const apiLink =
     "https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1";
 

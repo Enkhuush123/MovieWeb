@@ -42,8 +42,8 @@ export const PopularMovieSlide = () => {
 
   return (
     <div className="flex gap-[52px] max-sm:w-full ">
-      <div className="flex flex-col pl-[80px] pr-[80px] max-sm:p-5 ">
-        <div className="flex flex-row justify-between pt-[52px] w-full">
+      <div className="flex flex-col pr-20 pl-20  max-sm:p-5 ">
+        <div className="flex flex-row justify-between  w-full">
           <div>
             <h3 className="font-semibold text-2xl">Popular</h3>
           </div>
@@ -57,7 +57,7 @@ export const PopularMovieSlide = () => {
             </Link>
           </div>
         </div>
-        <div className="flex flex-wrap gap-8">
+        <div className="flex flex-wrap gap-8 justify-center">
           {upComingMovieList.slice(0, 10).map((movie, index) => {
             return (
               <MovieCard

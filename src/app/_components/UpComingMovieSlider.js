@@ -42,9 +42,9 @@ export const UpComingMovieSlide = () => {
   }
 
   return (
-    <div className="flex gap-[52px] max-sm:w-full   ">
-      <div className="flex flex-col pl-[80px] pr-[80px] max-sm:p-5 ">
-        <div className="flex flex-row justify-between pt-[52px]">
+    <div className="flex gap-[52px] m-auto max-sm:w-full   ">
+      <div className="flex flex-col pr-20 pl-20  m-auto max-sm:p-5 ">
+        <div className="flex flex-row justify-between  ">
           <h3 className="font-semibold text-2xl">Upcoming</h3>
           <div>
             <Link href="./upComing">
@@ -55,7 +55,7 @@ export const UpComingMovieSlide = () => {
             </Link>
           </div>
         </div>
-        <div className="flex flex-wrap gap-[32px] ">
+        <div className="flex flex-wrap gap-[32px] items-center justify-center ">
           {upComingMovieList.slice(0, 10).map((movie) => {
             return (
               <MovieCard

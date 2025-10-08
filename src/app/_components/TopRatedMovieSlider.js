@@ -44,20 +44,20 @@ export const TopRatedMovieSlider = () => {
 
   return (
     <div className="flex gap-[52px] max-sm:w-full ">
-      <div className="flex flex-col pl-[80px] pr-[80px] max-sm:p-5 ">
-        <div className="flex flex-row justify-between pt-[52px]">
+      <div className="flex flex-col pr-20 pl-20  max-sm:p-5 ">
+        <div className="flex flex-row justify-between ">
           <h3 className="font-semibold text-2xl">Top Rated</h3>
 
           <div>
             <Link href="./topRatedMovies/">
-              <p className="flex flex-row items-center gap-2 pr-[7px] cursor-pointer">
+              <p className="flex flex-row items-center  gap-2 pr-[7px] cursor-pointer">
                 See More
                 <FaArrowRight className="w-[9px] h-[9px]" />
               </p>
             </Link>
           </div>
         </div>
-        <div className="flex flex-wrap gap-8">
+        <div className="flex flex-wrap gap-8 justify-center">
           {upComingMovieList.slice(0, showMovies).map((movie, index) => {
             return (
               <MovieCard

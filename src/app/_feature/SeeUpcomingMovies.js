@@ -83,9 +83,9 @@ export const SeeUpcomingMovies = () => {
   }
 
   return (
-    <div className="flex flex-col w-[1440px] m-auto gap-10">
-      <div className="flex gap-[52px] pt-[52px] ">
-        <div className="flex flex-col pl-[80px] pr-[80px] ">
+    <div className="flex flex-col w-[1440px] m-auto gap-10 max-sm:w-full">
+      <div className="flex gap-[52px] pt-[52px] max-sm:p-0 ">
+        <div className="flex flex-col pl-[80px] pr-[80px] max-sm:p-5  ">
           <div className="flex flex-row justify-between pt-[52px]">
             <h3 className="font-semibold text-2xl">Upcoming Movies</h3>
           </div>
@@ -102,7 +102,7 @@ export const SeeUpcomingMovies = () => {
           </div>
         </div>
       </div>
-      <div className="flex gap-2 w-full h-10 items-end justify-end pr-[80px] ">
+      <div className="flex gap-2 w-full h-10 items-end justify-end pr-[80px] max-sm:w-full max-sm:p-0 ">
         <button
           onClick={prevPage}
           disabled={currentPage === 1}
