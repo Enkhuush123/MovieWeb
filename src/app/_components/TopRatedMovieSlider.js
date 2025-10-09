@@ -49,7 +49,7 @@ export const TopRatedMovieSlider = () => {
           <h3 className="font-semibold text-2xl">Top Rated</h3>
 
           <div>
-            <Link href="./topRatedMovies/">
+            <Link href="./TopRatedMovies/">
               <p className="flex flex-row items-center  gap-2 pr-[7px] cursor-pointer">
                 See More
                 <FaArrowRight className="w-[9px] h-[9px]" />

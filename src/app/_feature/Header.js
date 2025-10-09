@@ -19,6 +19,7 @@ export const Header = ({}) => {
   const [searchInput, setSearchInput] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [mobileSearch, setMobileSearch] = useState(false);
+  const [mobielGenre, setMobileGenre] = useState(false);
 
   const apiLink = "https://api.themoviedb.org/3/genre/movie/list?language=en";
   const router = useRouter();
@@ -78,12 +79,34 @@ export const Header = ({}) => {
       </div>
       <div className="flex items-center gap-8 max-sm:w-full max-sm:gap-2 ">
         <button
+          onClick={() => setMobileGenre(!mobielGenre)}
           className={`opacity-0 transition w-9 h-9 border border-gray-300 rounded-lg flex justify-center items-center ${
             mobileSearch ? "opacity-100" : "opacity-0"
           }`}
         >
           <FaChevronDown className="opactiy-50 w-[14px] h-[10px]" />{" "}
         </button>
+        {mobielGenre && (
+          <div className="absolute w-[577px] bg-white max-sm:w-[100%] left-0  top-15 flex flex-col flex-wrap p-5 gap-5 shadow-xs rounded-lg border border-[#E4E4E7] z-50 ">
+            <div className="flex flex-col gap-2">
+              <h3 className="font-semibold text-2xl">Genres</h3>
+              <p>See lists of movies by genre</p>
+            </div>
+            <div className="w-[537px] border border-[#E4E4E7]"></div>
+            <div className="flex flex-wrap gap-4 max-sm:w-full  ">
+              {genreList.map((genres) => {
+                return (
+                  <Genre
+                    key={genres.id}
+                    name={genres.name}
+                    genresId={genres.id}
+                    id={genres.id}
+                  />
+                );
+              })}
+            </div>
+          </div>
+        )}
         <div className=" max-sm:hidden flex items-center border border-[#E4E4E7] w-[97px] h-[36px] rounded-lg gap-2 justify-center font-medium text-sm hover:scale-103 z-50">
           <div
             className="flex items-center gap-2 cursor-pointer relative   "
@@ -115,17 +138,18 @@ export const Header = ({}) => {
           )}
         </div>
         <div
-          className=" flex items-center  gap-2 max-sm:flex max-sm:gap-0 max-sm:w-9 max-sm:h-9  w-[379px] h-[36px] rounded-lg p-3 border border-[#E4E4E7] max-sm:justify-center  z-50 ]
+          className=" flex items-center  gap-2 max-sm:flex max-sm:gap-0 max-sm:w-9 max-sm:h-9  w-[379px] h-[36px] rounded-lg p-3 border border-[#E4E4E7] max-sm:justify-center  z-50 cursor-pointer ]
                 "
         >
           <div className=" w-[11px] h-[11px]   ">
             <button
-              className="hidden max-sm:flex "
+              className="hidden max-sm:flex cursor-pointer  "
               onClick={() => setMobileSearch(!mobileSearch)}
             >
               <SearchIcon />
             </button>
           </div>
+
           <div className=" w-[11px] h-[11px] flex items-center max-sm:hidden ">
             <SearchIcon />
           </div>
@@ -144,19 +168,19 @@ export const Header = ({}) => {
                 return (
                   <div
                     onClick={() => router.push(`/movie-detail/${movie.id}`)}
-                    className="w-[537px] h-[116px] flex gap-3 hover:bg-black hover:text-white p-2 border-b border-gray-300  cursor-pointer z-50 max-sm:w-full  "
+                    className="w-[537px] h-auto flex gap-3 hover:bg-black hover:text-white p-6 border-b border-gray-300  cursor-pointer z-50 max-sm:w-full  "
                     key={movie.id}
                     title={movie.title}
                   >
-                    <div>
+                    <div className="w-[67px] h-[100px] flex-shrink-0">
                       <img
-                        className="w-[67px] h-[100px] rounded object-cover"
+                        className="w-[67px] h-[100px] rounded object-cover max-sm:w-full  "
                         src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
                       ></img>
                     </div>
-                    <div className="flex flex-col ">
+                    <div className="flex flex-col  ">
                       <div>{movie.title}</div>
-                      <div className="flex flex-row items-center gap-1">
+                      <div className="flex  items-center gap-1 text-sm">
                         <Star />{" "}
                         <p>
                           {movie.vote_average}
@@ -164,10 +188,8 @@ export const Header = ({}) => {
                         </p>
                       </div>
                     </div>
-                    <div className="flex flex-row ">
-                      <div className="flex  ">
-                        <p>{movie.release_date}</p>
-                      </div>
+                    <div className="flex items-end  ">
+                      <p>{movie.release_date}</p>
                     </div>
                   </div>
                 );

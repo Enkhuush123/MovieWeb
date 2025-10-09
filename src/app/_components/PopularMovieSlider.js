@@ -49,7 +49,7 @@ export const PopularMovieSlide = () => {
           </div>
 
           <div>
-            <Link href="./popular">
+            <Link href="./Popular">
               <p className="flex flex-row items-center gap-2 pr-[7px] cursor-pointer">
                 See More
                 <FaArrowRight className="w-[9px] h-[9px]" />
