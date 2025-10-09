@@ -87,19 +87,19 @@ export const MovieDetails = () => {
   }
   return (
     <div className="m-auto flex flex-col items-center max-sm:w-full gap-8  ">
-      <div className=" flex flex-col w-[1080px]  gap-6 max-sm:w-full   ">
+      <div className=" flex flex-col w-[1080px]  gap-6 max-sm:w-full max-sm:gap-0   ">
         <div className="flex justify-between max-sm:p-5 ">
           <div className="flex flex-col gap-1 ">
             <div>
               <h1 className="font-bold text-4xl">{movieDetail.title}</h1>
             </div>
-            <div className="flex flex-row gap-3">
+            <div className="flex flex-row gap-3 w-full">
               <p>{movieDetail.release_date}</p>·
               <p>{movieDetail.origin_country}</p>·<p>{hour}h</p>·
               <p>{minute}m</p>
             </div>
           </div>
-          <div className="pr-3 flex flex-col">
+          <div className="pr-3 flex flex-col items-center mt-3">
             <div>
               <p className="font-medium text-xs">Rating:</p>
             </div>
@@ -121,7 +121,7 @@ export const MovieDetails = () => {
         >
           <div className="w-[760px] h-[428px] relative max-sm:w-full max-sm:h-[283px] object-cover  ">
             <img
-              className="w-[760px] h-[428px] rounded-lg absolute -z-10 max-sm:flex max-sm:relative max-sm:w-full max-sm:h-[283px] object-cover max-sm:rounded-none"
+              className="w-[760px] h-[428px] rounded-lg absolute -z-10 max-sm:flex max-sm:relative max-sm:w-full max-sm:h-[283px] object-cover max-sm:rounded-none flex-shrink-0"
               src={`https://image.tmdb.org/t/p/original${movieDetail.backdrop_path}`}
               alt={movieDetail.title}
             ></img>
@@ -154,13 +154,13 @@ export const MovieDetails = () => {
         <div className="flex flex-col gap-3 max-sm:flex-row max-sm:w-full">
           <div className="w-[290px] h-[428px] max-sm:w-full max-sm:h-full hidden max-sm:flex    ">
             <img
-              className=" w-[290px] h-[428px] rounded-lg max-sm:w-full max-sm:h-[148px] max-sm:rounded-none  "
+              className=" w-[290px] h-[428px] rounded-lg max-sm:w-[100px] max-sm:h-auto  max-sm:rounded-none flex-shrink-0   "
               src={`https://image.tmdb.org/t/p/original${movieDetail.poster_path}`}
               alt={movieDetail.title}
             ></img>
           </div>
           <div className="max-sm:flex max-sm:flex-wrap flex flex-col gap-2">
-            <div className="flex flex-row gap-3  max-sm:flex-row ">
+            <div className="flex flex-wrap gap-3  max-sm:flex-row ">
               {movieDetail.genres?.map((genres) => {
                 return (
                   <div
@@ -237,7 +237,7 @@ export const MovieDetails = () => {
         </div>
       </div>
       {showTrailer && trailer && (
-        <div className="bg-black/90 fixed inset-0 bg-opacity-100 flex justify-center items-center  ">
+        <div className="bg-black/90 fixed inset-0 bg-opacity-100 flex justify-center items-center z-50  ">
           <div>
             {trailer && trailer.key ? (
               <iframe

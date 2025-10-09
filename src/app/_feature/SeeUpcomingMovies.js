@@ -102,7 +102,7 @@ export const SeeUpcomingMovies = () => {
           </div>
         </div>
       </div>
-      <div className="flex gap-2 w-full h-10 items-end justify-end pr-[80px] max-sm:w-full max-sm:p-0 ">
+      <div className="flex gap-2 w-full h-10 items-end justify-end pr-[80px] max-sm:w-full max-sm:p-0 max-sm:gap-0 max-sm:justify-center ">
         <button
           onClick={prevPage}
           disabled={currentPage === 1}

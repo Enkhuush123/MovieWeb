@@ -98,11 +98,11 @@ export const SeeMoreTopRated = () => {
           </div>
         </div>
       </div>
-      <div className="flex gap-2 w-full h-10 items-end justify-end pr-[80px] max-sm:justify-center max-sm:items-center max-sm:gap-0 max-sm:p-0 ">
+      <div className="flex gap-2 w-full h-10 items-end justify-end pr-[80px] max-sm:justify-center  max-sm:gap-0 max-sm:p-0 ">
         <button
           onClick={prevPage}
           disabled={currentPage === 1}
-          className={`px-3 py-1 rounded flex items-center gap-5 cursor-pointer  ${
+          className={`px-3 py-1 rounded flex items-center gap-5 cursor-pointer  max-sm:gap-2  ${
             currentPage === 1
               ? " cursor-not-allowed opacity-50"
               : " shadow-xs  "
@@ -130,7 +130,7 @@ export const SeeMoreTopRated = () => {
         <button
           onClick={nextPage}
           disabled={currentPage === totalPages}
-          className={`px-3 py-1 rounded flex items-center gap-5 cursor-pointer  ${
+          className={`px-3 py-1 rounded flex items-center gap-5 cursor-pointer max-sm:gap-2 ${
             currentPage === totalPages
               ? " cursor-not-allowed opacity-50"
               : "shadow-xs"

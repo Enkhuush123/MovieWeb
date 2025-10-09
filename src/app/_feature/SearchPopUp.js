@@ -93,19 +93,19 @@ export const SearchPop = () => {
   }
 
   return (
-    <div className=" flex flex-col gap-8">
-      <div className="pl-20">
+    <div className=" flex flex-col gap-8 m-auto max-sm:w-full">
+      <div className="pl-20 max-sm:pl-5">
         <p className="font-semibold text-3xl">Search results</p>
       </div>
-      <div className="w-[1440px] pr-20 pl-20 flex flex-row gap-8">
-        <div className="flex flex-col gap-7">
-          <div className="flex  flex-col">
-            <div>
+      <div className="w-[1440px] pr-20 pl-20 flex flex-row gap-8 max-sm:w-full max-sm:p-5 max-sm:flex-col">
+        <div className="flex flex-col gap-7 max-sm:w-full">
+          <div className="flex  flex-col max-sm:w-full ">
+            <div className="max-sm:w-full">
               <p>
                 {searchResult} results for &quot;{id}&quot;
               </p>
             </div>
-            <div className="flex flex-wrap gap-8">
+            <div className="flex flex-wrap gap-8 max-sm:w-full">
               {searchResultsMovie.slice(0, 9).map((movie) => {
                 return (
                   <MovieCard
@@ -120,11 +120,11 @@ export const SearchPop = () => {
               })}
             </div>
           </div>
-          <div className="flex gap-2 w-full h-10 items-end justify-end pr-[80px] ">
+          <div className="flex gap-2 w-full h-10 items-end justify-end pr-[80px] max-sm:p-0 max-sm:w-full max-sm:gap-0 max-sm:justify-center ">
             <button
               onClick={prevPage}
               disabled={currentPage === 1}
-              className={`px-3 py-1 rounded flex items-center gap-1 cursor-pointer  ${
+              className={`px-3 py-1 rounded flex items-center gap-1 cursor-pointer   ${
                 currentPage === 1
                   ? " cursor-not-allowed opacity-50"
                   : " shadow-xs  "
@@ -162,7 +162,7 @@ export const SearchPop = () => {
             </button>
           </div>
         </div>
-        <div className="border-r border-gray-300"></div>
+        <div className="border-b border-gray-300"></div>
         <div className="flex flex-col gap-5 ">
           <div className="flex gap-5 ">
             <div className=" w-[387px] flex flex-col flex-wrap  gap-5  rounded-lg  ">

@@ -65,7 +65,7 @@ export const Header = ({}) => {
   }, []);
 
   return (
-    <div className="flex  max-sm:pl-5  flex-row  justify-between items-center sm:px-20 pl-20 pt-3 pr-20 ">
+    <div className="flex  max-sm:pl-5    justify-between   pl-20 pt-3 pr-20 max-ms:w-full ">
       <div
         onClick={() => router.push("/")}
         className={`flex items-center  gap-2 cursor-pointer hover:scale-110 transition max-sm:w-full ${
@@ -77,10 +77,10 @@ export const Header = ({}) => {
           Movie Z
         </p>
       </div>
-      <div className="flex items-center gap-8 max-sm:w-full max-sm:gap-2 ">
+      <div className="flex items-center gap-8 max-sm:w-full max-sm:gap-0 ">
         <button
           onClick={() => setMobileGenre(!mobielGenre)}
-          className={`opacity-0 transition w-9 h-9 border border-gray-300 rounded-lg flex justify-center items-center ${
+          className={`opacity-0 transition w-9 h-9 border border-gray-300 rounded-lg flex justify-center items-center cursor-pointer ${
             mobileSearch ? "opacity-100" : "opacity-0"
           }`}
         >
@@ -138,7 +138,7 @@ export const Header = ({}) => {
           )}
         </div>
         <div
-          className=" flex items-center  gap-2 max-sm:flex max-sm:gap-0 max-sm:w-9 max-sm:h-9  w-[379px] h-[36px] rounded-lg p-3 border border-[#E4E4E7] max-sm:justify-center  z-50 cursor-pointer ]
+          className=" flex items-center  gap-2 max-sm:flex max-sm:gap-0 max-sm:w-9 max-sm:h-9  w-[379px] h-[36px] rounded-lg p-3 border border-[#E4E4E7] max-sm:justify-center  z-50  ]
                 "
         >
           <div className=" w-[11px] h-[11px]   ">

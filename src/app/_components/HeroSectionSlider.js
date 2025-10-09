@@ -9,7 +9,7 @@ import MovieDetail from "../movie-detail/[id]/page";
 import { Star } from "../_Icons/StarIcon";
 import { WatchWhite } from "../_Icons/WatchWhiteIcon";
 
-export const HeroSectionList = ({ onWatc, trailer }) => {
+export const HeroSectionList = ({ onWatch, trailer }) => {
   const apiLink =
     "https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1";
 
@@ -54,14 +54,34 @@ export const HeroSectionList = ({ onWatc, trailer }) => {
 
   if (loading) {
     return (
-      <div className="w-full h-[700px] flex items-center justify-center bg-gray-200">
-        <div className="w-[1440px] h-[700px] bg-gray-300 rounded-lg"></div>
+      <div className="w-full  flex flex-col items-center justify-center  ">
+        <div className="hidden md:block w-[1440px] h-[700px] bg-gray-300 rounded-lg "></div>
+
+        <div className="md:hidden w-full h-[246px] bg-gray-300 rounded-lg "></div>
+        <div className="md:hidden gap-3 w-full p-5  ">
+          <div className="flex justify-between">
+            <div className="flex flex-col gap-10">
+              <div className="max-sm:w-[101px] max-sm:h-[18px] bg-gray-200 rounded"></div>
+              <div className="font-bold text-4xl max-sm:w-[101px] max-sm:h-[30px] bg-gray-200  "></div>
+            </div>
+            <div className="flex items-center gap-1 max-sm:w-[101px] max-sm:h-[30px] bg-gray-200"></div>
+          </div>
+
+          <div>
+            <div className="max-sm:w-[335px] max-sm:h-[20px] bg-gray-200"></div>
+            <div className="max-sm:w-[335px] max-sm:h-[20px] bg-gray-200"></div>
+            <div className="max-sm:w-[335px] max-sm:h-[20px] bg-gray-200"></div>
+            <div className="max-sm:w-[335px] max-sm:h-[20px] bg-gray-200"></div>
+          </div>
+
+          <div className="max-sm:w-[169px] max-sm:h-[40px] bg-gray-200"></div>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="">
+    <div>
       <div className=" relative h-full w-full overflow-hidden max-sm:w-full ">
         <div
           className="flex transition-transform duration-700 ease-in-out   "
@@ -125,7 +145,7 @@ export const HeroSectionList = ({ onWatc, trailer }) => {
           ))}
         </div>
         {showTrailer && (
-          <div className="bg-black/90 fixed inset-0 bg-opacity-100 flex justify-center  items-center   ">
+          <div className="bg-black/90 fixed inset-0 bg-opacity-100 flex justify-center  items-center z-50   ">
             <iframe
               width="1280"
               height="720"
@@ -167,7 +187,7 @@ export const HeroSectionList = ({ onWatc, trailer }) => {
 
             <div>
               <button
-                onClick={() => onWatch(trailer)}
+                onClick={() => setShowTrailer(currentMovie)}
                 className=" w-[145px] h-[40px] bg-black text-white rounded-lg flex items-center justify-center gap-2 hover:opacity-70 transition duration-300 cursor-pointer relative  "
               >
                 <WatchWhite />
