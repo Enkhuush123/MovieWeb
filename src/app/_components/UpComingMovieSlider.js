@@ -47,7 +47,7 @@ export const UpComingMovieSlide = () => {
         <div className="flex flex-row justify-between  ">
           <h3 className="font-semibold text-2xl">Upcoming</h3>
           <div>
-            <Link href="/upComing">
+            <Link href="./upComing">
               <p className="flex flex-row items-center gap-2 pr-[7px] cursor-pointer">
                 See More
                 <FaArrowRight className="w-[9px] h-[9px]" />
