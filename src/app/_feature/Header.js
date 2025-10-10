@@ -20,6 +20,7 @@ export const Header = ({}) => {
   const [searchResults, setSearchResults] = useState([]);
   const [mobileSearch, setMobileSearch] = useState(false);
   const [mobielGenre, setMobileGenre] = useState(false);
+  const [mobileBar, setMobileBar] = useState(false);
 
   const apiLink = "https://api.themoviedb.org/3/genre/movie/list?language=en";
   const router = useRouter();
@@ -65,23 +66,26 @@ export const Header = ({}) => {
   }, []);
 
   return (
-    <div className="flex  max-sm:pl-5    justify-between   pl-20 pt-3 pr-20 max-ms:w-full ">
+    <div className="flex   max-sm:pl-5    justify-between  max-sm:p-0 max-sm:pt-5  pl-20 pt-3 pr-20 max-ms:w-full ">
       <div
         onClick={() => router.push("/")}
-        className={`flex items-center  gap-2 cursor-pointer hover:scale-110 transition max-sm:w-full ${
-          mobileSearch ? "hidden" : "flex"
+        className={`flex items-center  gap-2   transition max-sm:w-full ${
+          mobileBar ? "hidden" : "flex"
         }`}
       >
-        <FilmIconPurple />
-        <p className="text-indigo-700 font-bold text-base sm-text-lg ">
-          Movie Z
-        </p>
+        {" "}
+        <div className="flex items-center gap-2 cursor-pointer hover:scale-110">
+          <FilmIconPurple />
+          <p className="text-indigo-700 font-bold text-base sm-text-lg ">
+            Movie Z
+          </p>
+        </div>
       </div>
-      <div className="flex items-center gap-8 max-sm:w-full max-sm:gap-0 ">
+      <div className="flex items-center gap-8   max-sm:gap-2 max-sm:w-[120px] ">
         <button
           onClick={() => setMobileGenre(!mobielGenre)}
-          className={`opacity-0 transition w-9 h-9 border border-gray-300 rounded-lg flex justify-center items-center cursor-pointer ${
-            mobileSearch ? "opacity-100" : "opacity-0"
+          className={` md:hidden transition w-9 h-9 border border-gray-300 rounded-lg flex justify-center items-center cursor-pointer ${
+            mobileBar ? "block" : "hidden"
           }`}
         >
           <FaChevronDown className="opactiy-50 w-[14px] h-[10px]" />{" "}
@@ -137,91 +141,105 @@ export const Header = ({}) => {
             </div>
           )}
         </div>
-        <div
-          className=" flex items-center  gap-2 max-sm:flex max-sm:gap-0 max-sm:w-9 max-sm:h-9  w-[379px] h-[36px] rounded-lg p-3 border border-[#E4E4E7] max-sm:justify-center  z-50  ]
+        <div>
+          <div
+            className=" flex items-center  gap-2 max-sm:flex max-sm:gap-0 max-sm:w-9 max-sm:h-9  w-[379px] h-[36px] rounded-lg p-3 border border-[#E4E4E7] max-sm:justify-center    ]
                 "
-        >
-          <div className=" w-[11px] h-[11px]   ">
-            <button
-              className="hidden max-sm:flex cursor-pointer  "
-              onClick={() => setMobileSearch(!mobileSearch)}
-            >
-              <SearchIcon />
-            </button>
-          </div>
-
-          <div className=" w-[11px] h-[11px] flex items-center max-sm:hidden ">
-            <SearchIcon />
-          </div>
-          <div className="max-sm:hidden w-[379px]  ">
-            <input
-              value={searchInput}
-              onChange={searchHandle}
-              className="pl-2 outline-none w-[335px] "
-              type="search"
-              placeholder="Search"
-            ></input>
-          </div>
-          {searchResults.length > 0 && (
-            <div className="w-[537px] h-auto bg-white absolute max-sm:w-[335px] max-sm:absolute max-sm:left-[20px] flex justify-center items-center flex-col top-20 ">
-              {searchResults.slice(0, 5).map((movie) => {
-                return (
-                  <div
-                    onClick={() => router.push(`/movie-detail/${movie.id}`)}
-                    className="w-[537px] h-auto flex gap-3 hover:bg-black hover:text-white p-6 border-b border-gray-300  cursor-pointer z-50 max-sm:w-full  "
-                    key={movie.id}
-                    title={movie.title}
-                  >
-                    <div className="w-[67px] h-[100px] flex-shrink-0">
-                      <img
-                        className="w-[67px] h-[100px] rounded object-cover max-sm:w-full  "
-                        src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
-                      ></img>
-                    </div>
-                    <div className="flex flex-col  ">
-                      <div>{movie.title}</div>
-                      <div className="flex  items-center gap-1 text-sm">
-                        <Star />{" "}
-                        <p>
-                          {movie.vote_average}
-                          <span className="text-xs text-gray-500">/10</span>
-                        </p>
-                      </div>
-                    </div>
-                    <div className="flex items-end  ">
-                      <p>{movie.release_date}</p>
-                    </div>
-                  </div>
-                );
-              })}
-              <div
-                onClick={() => router.push(`/search-detail/${searchInput}`)}
-                className="w-[230px] h-[40px] flex pl-4 items-center cursor-pointer"
+          >
+            <div className=" w-[11px] h-[11px]   ">
+              <button
+                className="hidden max-sm:flex cursor-pointer  "
+                onClick={() => setMobileBar(!mobileBar)}
               >
-                See all results for &quot;{searchInput}&quot;
-              </div>
+                <SearchIcon />
+              </button>
             </div>
-          )}
+
+            <div className=" w-[11px] h-[11px] flex items-center max-sm:hidden ">
+              <SearchIcon />
+            </div>
+            <div className="max-sm:hidden w-[379px]  ">
+              <input
+                value={searchInput}
+                onChange={searchHandle}
+                className="pl-2 outline-none w-[335px] flex items-center "
+                type="search"
+                placeholder="Search"
+              ></input>
+            </div>
+          </div>
         </div>
-      </div>{" "}
+        <div>
+          <button
+            className={` rounded-lg w-[36px] h-[36px] border border-[#E4E4E7] flex items-center justify-center transition md:hidden ${
+              mobileBar ? "hidden " : "flex"
+            }`}
+          >
+            <MoonIcon />
+          </button>
+        </div>
+      </div>
+
       <div>
         <button
-          className={` rounded-lg w-[36px] h-[36px] border border-[#E4E4E7] flex items-center justify-center transition ${
-            mobileSearch ? "hidden " : "flex"
+          className={` rounded-lg w-[36px] h-[36px] border border-[#E4E4E7] flex items-center justify-center transition max-sm:hidden ${
+            mobileBar ? "hidden " : "flex"
           }`}
         >
           <MoonIcon />
         </button>
       </div>
-      {mobileSearch && (
-        <div className=" max-sm:w-full hidden max-sm:flex absolute left-25 ">
+
+      {mobileBar && (
+        <div className=" max-sm:w-full hidden max-sm:flex  ">
           <input
             value={searchInput}
             onChange={searchHandle}
-            className="pl-2 outline-none max-sm:w-full "
+            className="pl-2 outline-none max-sm:w-full pr-2 "
             type="search"
             placeholder="Search"
           ></input>
+        </div>
+      )}
+
+      {searchResults.length > 0 && (
+        <div className="w-[537px] h-auto bg-white absolute max-sm:w-[335px] max-sm:absolute max-sm:left-10 flex justify-center items-center flex-col top-20 right-175 z-50 shadow rounded-lg">
+          {searchResults.slice(0, 5).map((movie) => {
+            return (
+              <div
+                onClick={() => router.push(`/movie-detail/${movie.id}`)}
+                className="w-[537px] h-auto flex gap-3 hover:bg-black hover:text-white p-6 border-b border-gray-300  cursor-pointer z-50 max-sm:w-full  "
+                key={movie.id}
+                title={movie.title}
+              >
+                <div className="w-[67px] h-[100px] flex-shrink-0">
+                  <img
+                    className="w-[67px] h-[100px] rounded object-cover max-sm:w-full  "
+                    src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
+                  ></img>
+                </div>
+                <div className="flex flex-col  ">
+                  <div>{movie.title}</div>
+                  <div className="flex  items-center gap-1 text-sm">
+                    <Star />{" "}
+                    <p>
+                      {movie.vote_average}
+                      <span className="text-xs text-gray-500">/10</span>
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-end  ">
+                  <p>{movie.release_date}</p>
+                </div>
+              </div>
+            );
+          })}
+          <div
+            onClick={() => router.push(`/search-detail/${searchInput}`)}
+            className="w-[230px] h-[40px] flex pl-4 items-center cursor-pointer"
+          >
+            See all results for &quot;{searchInput}&quot;
+          </div>
         </div>
       )}
     </div>

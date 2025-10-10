@@ -106,7 +106,7 @@ export const SeeUpcomingMovies = () => {
         <button
           onClick={prevPage}
           disabled={currentPage === 1}
-          className={`px-3 py-1 rounded flex items-center gap-1 cursor-pointer  ${
+          className={`px-3 py-1 rounded flex items-center gap-1 cursor-pointer  max-sm:gap-2  ${
             currentPage === 1
               ? " cursor-not-allowed opacity-50"
               : " shadow-xs  "
@@ -134,7 +134,7 @@ export const SeeUpcomingMovies = () => {
         <button
           onClick={nextPage}
           disabled={currentPage === totalPages}
-          className={`px-3 py-1 rounded flex items-center gap-1 cursor-pointer ${
+          className={`px-3 py-1 rounded flex items-center gap-1 cursor-pointer  max-sm:gap-2 ${
             currentPage === totalPages
               ? " cursor-not-allowed opacity-50"
               : "shadow-xs"

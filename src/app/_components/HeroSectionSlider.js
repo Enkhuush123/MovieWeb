@@ -9,7 +9,9 @@ import MovieDetail from "../movie-detail/[id]/page";
 import { Star } from "../_Icons/StarIcon";
 import { WatchWhite } from "../_Icons/WatchWhiteIcon";
 
-export const HeroSectionList = ({ onWatch, trailer }) => {
+export const HeroSectionList = (props) => {
+  const { movieId } = props;
+
   const apiLink =
     "https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1";
 
@@ -145,21 +147,22 @@ export const HeroSectionList = ({ onWatch, trailer }) => {
           ))}
         </div>
         {showTrailer && (
-          <div className="bg-black/90 fixed inset-0 bg-opacity-100 flex justify-center  items-center z-50   ">
-            <iframe
-              width="1280"
-              height="720"
-              src={`https://www.youtube.com/embed/${showTrailer.key}`}
-              title="title"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowFullScreen
-            ></iframe>
+          <div className="bg-black/90 fixed inset-0 bg-opacity-100 flex justify-center  items-center z-50 flex-col   ">
             <h1
               onClick={() => setShowTrailer(false)}
-              className="text-white cursor-pointer font-bold text-4xl absolute top-30 right-100 hover:scale-120"
+              className="text-white cursor-pointer font-bold text-4xl flex w-[1280px] justify-end pb-5 pr-2   hover:scale-120 max-sm:w-full max-sm:pr-10"
             >
               X
             </h1>
+            <iframe
+              width="1280"
+              height="720"
+              src={`https://www.youtube.com/embed/${showTrailer.key}?autoplay=0`}
+              title="title"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+              className=" max-sm:w-[300px] max-sm:h-[300px]  "
+            ></iframe>
           </div>
         )}
       </div>
@@ -187,7 +190,7 @@ export const HeroSectionList = ({ onWatch, trailer }) => {
 
             <div>
               <button
-                onClick={() => setShowTrailer(currentMovie)}
+                onClick={() => setShowTrailer(currentMovie.trailer)}
                 className=" w-[145px] h-[40px] bg-black text-white rounded-lg flex items-center justify-center gap-2 hover:opacity-70 transition duration-300 cursor-pointer relative  "
               >
                 <WatchWhite />
