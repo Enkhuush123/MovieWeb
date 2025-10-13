@@ -46,7 +46,7 @@ export const HeroSectionSlide = (props) => {
   }, []);
 
   return (
-    <div className="max-sm:w-full max-sm:flex max-sm:flex-col max-sm:items-center">
+    <div className="max-sm:w-full max-sm:flex max-sm:flex-col max-sm:items-center bg-white">
       <div className="relative w-full h-[700px]  max-sm:w-full max-sm:h-full">
         <img
           src={`https://image.tmdb.org/t/p/original${img}`}

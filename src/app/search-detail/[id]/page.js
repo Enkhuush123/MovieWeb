@@ -6,7 +6,7 @@ import { SearchPop } from "@/app/_feature/SearchPopUp";
 
 export default function SearchMovies() {
   return (
-    <div className="flex flex-col w-[1440px] m-auto shadow-xs border-[#E4E4E7] gap-13 bg-white max-sm:w-full">
+    <div className="flex flex-col w-[1440px] m-auto  gap-13 max-sm:w-full">
       <Header />
       <SearchPop />
       <Footer />

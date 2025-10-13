@@ -161,7 +161,7 @@ export const HeroSectionList = () => {
           <div className="bg-black/90 fixed inset-0 bg-opacity-100 flex justify-center  items-center z-50 flex-col   ">
             <h1
               onClick={() => setShowTrailer(false)}
-              className="text-white cursor-pointer font-bold text-4xl flex w-[1280px] justify-end pb-5 pr-2    max-sm:w-full max-sm:pr-10"
+              className="text-white cursor-pointer font-bold text-4xl flex w-[1280px] justify-end p-5   max-sm:w-full "
             >
               X
             </h1>
@@ -172,7 +172,7 @@ export const HeroSectionList = () => {
               title="title"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowFullScreen
-              className=" max-sm:w-[400px] max-sm:h-[300px]   "
+              className=" max-sm:w-full max-sm:h-[300px] p-5   "
             ></iframe>
           </div>
         )}

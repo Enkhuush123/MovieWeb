@@ -12,6 +12,7 @@ import { Star } from "../_Icons/StarIcon";
 import { RightButton } from "../_Icons/RightIcon";
 import { useRouter } from "next/navigation";
 import { SearchIcon } from "../_Icons/SearchIcon";
+import { ThemeToggle } from "../them-toggle";
 
 export const Header = ({}) => {
   const [openGenres, setOpenGenres] = useState(false);
@@ -38,6 +39,7 @@ export const Header = ({}) => {
   const searchHandle = async (e) => {
     const searchInpute = e.target.value;
     setSearchInput(searchInpute);
+    setOpenGenres(false);
     console.log(searchInpute, "search");
 
     if (!searchInpute) {
@@ -117,13 +119,13 @@ export const Header = ({}) => {
         <div className=" max-sm:hidden flex items-center border border-[#E4E4E7] w-[97px] h-[36px] rounded-lg gap-2 justify-center font-medium text-sm hover:scale-103 z-50">
           <div
             className="flex items-center gap-2 cursor-pointer relative   "
-            onClick={() => setOpenGenres(!openGenres)}
+            onClick={() => setOpenGenres(!openGenres) && setSearchInput(" ")}
           >
             <FaChevronDown className="opactiy-50 w-[14px] h-[10px]" />
             Genre
           </div>
           {openGenres && (
-            <div className="absolute w-[577px] bg-white  mt-95 ml-120 flex flex-col flex-wrap p-5 gap-5 shadow-xs rounded-lg border border-[#E4E4E7] z-50 ">
+            <div className="absolute w-[577px] bg-white dark:bg-black  mt-95 ml-120 flex flex-col flex-wrap p-5 gap-5 shadow-xs rounded-lg border border-[#E4E4E7] z-50 ">
               <div className="flex flex-col gap-2">
                 <h3 className="font-semibold text-2xl">Genres</h3>
                 <p>See lists of movies by genre</p>
@@ -154,12 +156,12 @@ export const Header = ({}) => {
                 className="hidden max-sm:flex cursor-pointer  "
                 onClick={() => setMobileBar(!mobileBar)}
               >
-                <SearchIcon />
+                <SearchIcon className="text-[#FAFAFA]" />
               </button>
             </div>
 
-            <div className=" w-[11px] h-[11px] flex items-center max-sm:hidden ">
-              <SearchIcon />
+            <div className=" w-[11px] h-[11px] flex items-center max-sm:hidden">
+              <SearchIcon className="text-[#FAFAFA]" />
             </div>
             <div className="max-sm:hidden w-[379px]  ">
               <input
@@ -172,25 +174,17 @@ export const Header = ({}) => {
             </div>
           </div>
         </div>
-        <div>
-          <button
-            className={` rounded-lg w-[36px] h-[36px] border border-[#E4E4E7] flex items-center justify-center transition md:hidden ${
-              mobileBar ? "hidden " : "flex"
-            }`}
-          >
-            <MoonIcon />
-          </button>
-        </div>
-      </div>
-
-      <div>
-        <button
-          className={` rounded-lg w-[36px] h-[36px] border border-[#E4E4E7] flex items-center justify-center transition max-sm:hidden ${
+        <div
+          className={` rounded-lg w-[36px] h-[36px] border border-[#E4E4E7] flex items-center justify-center transition md:hidden ${
             mobileBar ? "hidden " : "flex"
           }`}
         >
-          <MoonIcon />
-        </button>
+          <ThemeToggle />
+        </div>
+      </div>
+
+      <div className="w-9 h-9 border rounded-lg flex items-center justify-center cursor-pointer max-sm:hidden">
+        <ThemeToggle />
       </div>
 
       {mobileBar && (
@@ -217,7 +211,7 @@ export const Header = ({}) => {
         </div>
       )}
       {searchResults.length > 0 && (
-        <div className="w-[537px] h-auto bg-white absolute max-sm:w-full  max-sm:absolute max-sm:left-0 flex justify-center items-center left-250 flex-col top-20  z-50 shadow rounded-lg ">
+        <div className="w-[537px] h-auto bg-white dark:bg-black absolute max-sm:w-full  max-sm:absolute max-sm:left-0 flex justify-center items-center left-250 flex-col top-20  z-50 shadow rounded-lg ">
           {searchResults.slice(0, 5).map((movie) => {
             return (
               <div

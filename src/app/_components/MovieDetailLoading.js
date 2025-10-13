@@ -2,7 +2,7 @@
 
 export const MovieDetailLoading = () => {
   return (
-    <div className="m-auto flex flex-col items-center max-sm:w-full ">
+    <div className="m-auto flex flex-col items-center max-sm:w-full dark:bg-[#27272A] ">
       <div className=" flex flex-col w-[1080px]  gap-6 max-sm:w-full">
         <div className="flex justify-between">
           <div className="flex flex-col gap-1 ">

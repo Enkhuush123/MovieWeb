@@ -24,7 +24,7 @@ export const MovieCard = (props) => {
           alt="poster"
         ></img>
       </div>
-      <div className="flex flex-col p-2  shadow-sm h-[96px] rounded-b-lg  gap-1  ">
+      <div className="flex flex-col p-2  shadow-sm h-[96px] rounded-b-lg  gap-1 dark:bg-[#27272A]  ">
         <div>
           <div className="flex gap-1 font-medium text-base items-center">
             <Star className="w-2 h-2" />{" "}
