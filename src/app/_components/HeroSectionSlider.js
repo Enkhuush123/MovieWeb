@@ -68,26 +68,26 @@ export const HeroSectionList = () => {
   if (loading) {
     return (
       <div className="w-full  flex flex-col items-center justify-center  ">
-        <div className="hidden md:block w-[1440px] h-[700px] bg-gray-300 rounded-lg "></div>
+        <div className="hidden md:block w-[1440px] h-[700px] bg-gray-300 rounded-lg dark:bg-[#27272A] "></div>
 
-        <div className="md:hidden w-full h-[246px] bg-gray-300 rounded-lg "></div>
+        <div className="md:hidden w-full h-[246px] bg-gray-300 rounded-lg dark:bg-[#27272A] "></div>
         <div className="md:hidden gap-3 w-full p-5  ">
           <div className="flex justify-between">
             <div className="flex flex-col gap-10">
-              <div className="max-sm:w-[101px] max-sm:h-[18px] bg-gray-200 rounded"></div>
-              <div className="font-bold text-4xl max-sm:w-[101px] max-sm:h-[30px] bg-gray-200  "></div>
+              <div className="max-sm:w-[101px] max-sm:h-[18px] bg-gray-200 dark:bg-[#27272A] rounded"></div>
+              <div className="font-bold text-4xl max-sm:w-[101px] max-sm:h-[30px] bg-gray-200 dark:bg-[#27272A]  "></div>
             </div>
-            <div className="flex items-center gap-1 max-sm:w-[101px] max-sm:h-[30px] bg-gray-200"></div>
+            <div className="flex items-center gap-1 max-sm:w-[101px] max-sm:h-[30px] bg-gray-200 dark:bg-[#27272A]"></div>
           </div>
 
           <div>
-            <div className="max-sm:w-[335px] max-sm:h-[20px] bg-gray-200"></div>
-            <div className="max-sm:w-[335px] max-sm:h-[20px] bg-gray-200"></div>
-            <div className="max-sm:w-[335px] max-sm:h-[20px] bg-gray-200"></div>
-            <div className="max-sm:w-[335px] max-sm:h-[20px] bg-gray-200"></div>
+            <div className="max-sm:w-[335px] max-sm:h-[20px] bg-gray-200 dark:bg-[#27272A]"></div>
+            <div className="max-sm:w-[335px] max-sm:h-[20px] bg-gray-200 dark:bg-[#27272A]"></div>
+            <div className="max-sm:w-[335px] max-sm:h-[20px] bg-gray-200 dark:bg-[#27272A]"></div>
+            <div className="max-sm:w-[335px] max-sm:h-[20px] bg-gray-200 dark:bg-[#27272A]"></div>
           </div>
 
-          <div className="max-sm:w-[169px] max-sm:h-[40px] bg-gray-200"></div>
+          <div className="max-sm:w-[169px] max-sm:h-[40px] bg-gray-200 dark:bg-[#27272A]"></div>
         </div>
       </div>
     );
@@ -126,7 +126,7 @@ export const HeroSectionList = () => {
             {currentIndex > 0 && (
               <button
                 onClick={prev}
-                className="w-10 h-10 bg-white rounded-full flex justify-center items-center cursor-pointer pointer-events-auto "
+                className="w-10 h-10 bg-white  rounded-full flex justify-center items-center cursor-pointer pointer-events-auto "
               >
                 <LeftArrow />
               </button>
@@ -137,7 +137,7 @@ export const HeroSectionList = () => {
             {currentIndex < headerMovie.length - 1 && (
               <button
                 onClick={next}
-                className="w-10 h-10 bg-white rounded-full flex justify-center items-center cursor-pointer pointer-events-auto "
+                className="w-10 h-10 bg-white text-black  rounded-full flex justify-center items-center cursor-pointer pointer-events-auto "
               >
                 <RightButton />
               </button>
@@ -177,16 +177,16 @@ export const HeroSectionList = () => {
           </div>
         )}
       </div>
-      <div className="hidden max-sm:flex   gap-3 w-full text-black p-5  ">
+      <div className="hidden max-sm:flex   gap-3 w-full  p-5  ">
         {currentMovie && (
-          <div className="text-black flex flex-col gap-4  w-[650px] h-full ">
+          <div className=" flex flex-col gap-4  w-[650px] h-full ">
             <div className="flex justify-between">
               <div>
                 <div>
-                  <p className="text-black">Now Playing:</p>
+                  <p>Now Playing:</p>
                 </div>
                 <div className="font-bold text-4xl ">
-                  <h1 className="text-black">{currentMovie.title}</h1>
+                  <h1>{currentMovie.title}</h1>
                 </div>
               </div>
               <div className="flex items-center gap-1">
@@ -202,7 +202,7 @@ export const HeroSectionList = () => {
             <div>
               <button
                 onClick={() => handleWatchTrailer(currentMovie.id)}
-                className=" w-[145px] h-[40px] bg-black text-white rounded-lg flex items-center justify-center gap-2 hover:opacity-70 transition duration-300 cursor-pointer relative  "
+                className=" w-[145px] h-[40px] bg-black dark:bg-[#27272A] text-white rounded-lg flex items-center justify-center gap-2 hover:opacity-70 transition duration-300 cursor-pointer relative  "
               >
                 <WatchWhite />
                 Watch Trailer

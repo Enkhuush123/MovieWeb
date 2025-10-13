@@ -156,7 +156,7 @@ export const Header = ({}) => {
                 className="hidden max-sm:flex cursor-pointer  "
                 onClick={() => setMobileBar(!mobileBar)}
               >
-                <SearchIcon className="text-[#FAFAFA]" />
+                <SearchIcon className="text-[#FAFAFA] flex justify-center items-center" />
               </button>
             </div>
 
