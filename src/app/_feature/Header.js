@@ -18,9 +18,10 @@ export const Header = ({}) => {
   const [genreList, setGenreList] = useState([]);
   const [searchInput, setSearchInput] = useState("");
   const [searchResults, setSearchResults] = useState([]);
-  const [mobileSearch, setMobileSearch] = useState(false);
+
   const [mobielGenre, setMobileGenre] = useState(false);
   const [mobileBar, setMobileBar] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const apiLink = "https://api.themoviedb.org/3/genre/movie/list?language=en";
   const router = useRouter();
@@ -43,6 +44,7 @@ export const Header = ({}) => {
       setSearchResults([]);
       return;
     }
+    setLoading(true);
 
     const result = await fetch(
       `https://api.themoviedb.org/3/search/movie?query=${searchInpute}&language=en-US&page=1`,
@@ -51,6 +53,7 @@ export const Header = ({}) => {
 
     const jsonInputData = await result.json();
     setSearchResults(jsonInputData.results);
+    setLoading(false);
   };
 
   const getData = async () => {
@@ -201,14 +204,25 @@ export const Header = ({}) => {
           ></input>
         </div>
       )}
-
+      {loading && (
+        <div className="w-[537px] h-[100px] bg-white absolute max-sm:w-full  max-sm:absolute max-sm:left-0 flex justify-center left-250 items-center flex-col top-20  z-50 shadow rounded-lg ">
+          <div className="flex flex-col items-center justify-center gap-2">
+            <div className="w-6 h-6 border-4 border-gray-300 border-t-indigo-600 rounded-full animate-spin"></div>
+          </div>
+        </div>
+      )}
+      {!loading && searchInput && searchResults.length === 0 && (
+        <div className="w-[537px] h-[100px] bg-white absolute max-sm:w-full  max-sm:absolute max-sm:left-0 flex justify-center left-250 items-center flex-col top-20  z-50 shadow rounded-lg">
+          <p className="text-gray-600 text-sm font-medium">No results found</p>
+        </div>
+      )}
       {searchResults.length > 0 && (
-        <div className="w-[537px] h-auto bg-white absolute max-sm:w-[335px] max-sm:absolute max-sm:left-10 flex justify-center items-center flex-col top-20 right-175 z-50 shadow rounded-lg">
+        <div className="w-[537px] h-auto bg-white absolute max-sm:w-full  max-sm:absolute max-sm:left-0 flex justify-center items-center left-250 flex-col top-20  z-50 shadow rounded-lg ">
           {searchResults.slice(0, 5).map((movie) => {
             return (
               <div
                 onClick={() => router.push(`/movie-detail/${movie.id}`)}
-                className="w-[537px] h-auto flex gap-3 hover:bg-black hover:text-white p-6 border-b border-gray-300  cursor-pointer z-50 max-sm:w-full  "
+                className="w-[537px] h-auto flex gap-3 hover:bg-black hover:text-white p-2 border-b border-gray-300  cursor-pointer z-50 max-sm:w-full  "
                 key={movie.id}
                 title={movie.title}
               >
@@ -218,7 +232,7 @@ export const Header = ({}) => {
                     src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
                   ></img>
                 </div>
-                <div className="flex flex-col  ">
+                <div className="flex flex-col w-full ">
                   <div>{movie.title}</div>
                   <div className="flex  items-center gap-1 text-sm">
                     <Star />{" "}
@@ -228,7 +242,8 @@ export const Header = ({}) => {
                     </p>
                   </div>
                 </div>
-                <div className="flex items-end  ">
+
+                <div className="flex items-end justify-end w-full   ">
                   <p>{movie.release_date}</p>
                 </div>
               </div>
@@ -236,7 +251,7 @@ export const Header = ({}) => {
           })}
           <div
             onClick={() => router.push(`/search-detail/${searchInput}`)}
-            className="w-[230px] h-[40px] flex pl-4 items-center cursor-pointer"
+            className="w-[230p] h-[40px] flex  items-center cursor-pointer "
           >
             See all results for &quot;{searchInput}&quot;
           </div>

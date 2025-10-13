@@ -18,7 +18,7 @@ const options = {
 };
 
 export const HeroSectionSlide = (props) => {
-  const [trailer, setTrailer] = useState(null);
+  const [trailer, setTrailer] = useState([]);
 
   // const params = useParams();
 

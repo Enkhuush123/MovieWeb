@@ -9,9 +9,7 @@ import MovieDetail from "../movie-detail/[id]/page";
 import { Star } from "../_Icons/StarIcon";
 import { WatchWhite } from "../_Icons/WatchWhiteIcon";
 
-export const HeroSectionList = (props) => {
-  const { movieId } = props;
-
+export const HeroSectionList = () => {
   const apiLink =
     "https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1";
 
@@ -29,6 +27,7 @@ export const HeroSectionList = (props) => {
   const [loading, setLoading] = useState(false);
   const [showTrailer, setShowTrailer] = useState(null);
   const currentMovie = headerMovie[currentIndex];
+  const [trailer, setTrailer] = useState([]);
   console.log(currentMovie, "cureent  ");
   console.log(headerMovie);
 
@@ -37,9 +36,21 @@ export const HeroSectionList = (props) => {
     const data = await fetch(apiLink, options);
     const jsonData = await data.json();
     setHeaderMovie(jsonData.results.slice(0, 5));
+
     setTimeout(() => setLoading(false), 600);
 
     console.log(jsonData, "haha");
+  };
+  const handleWatchTrailer = async (movieId) => {
+    const res = await fetch(
+      `https://api.themoviedb.org/3/movie/${movieId}/videos?language=en-US`,
+      options
+    );
+    const json = await res.json();
+    const trailer =
+      json.results.find((t) => t.type === "Trailer" && t.site === "YouTube") ||
+      json.results[0];
+    setShowTrailer(trailer);
   };
 
   useEffect(() => {
@@ -146,11 +157,11 @@ export const HeroSectionList = (props) => {
             ></button>
           ))}
         </div>
-        {showTrailer && (
+        {showTrailer && showTrailer.key && (
           <div className="bg-black/90 fixed inset-0 bg-opacity-100 flex justify-center  items-center z-50 flex-col   ">
             <h1
               onClick={() => setShowTrailer(false)}
-              className="text-white cursor-pointer font-bold text-4xl flex w-[1280px] justify-end pb-5 pr-2   hover:scale-120 max-sm:w-full max-sm:pr-10"
+              className="text-white cursor-pointer font-bold text-4xl flex w-[1280px] justify-end pb-5 pr-2    max-sm:w-full max-sm:pr-10"
             >
               X
             </h1>
@@ -161,7 +172,7 @@ export const HeroSectionList = (props) => {
               title="title"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowFullScreen
-              className=" max-sm:w-[300px] max-sm:h-[300px]  "
+              className=" max-sm:w-[400px] max-sm:h-[300px]   "
             ></iframe>
           </div>
         )}
@@ -190,7 +201,7 @@ export const HeroSectionList = (props) => {
 
             <div>
               <button
-                onClick={() => setShowTrailer(currentMovie.trailer)}
+                onClick={() => handleWatchTrailer(currentMovie.id)}
                 className=" w-[145px] h-[40px] bg-black text-white rounded-lg flex items-center justify-center gap-2 hover:opacity-70 transition duration-300 cursor-pointer relative  "
               >
                 <WatchWhite />
