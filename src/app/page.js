@@ -9,7 +9,7 @@ import { Header } from "./_feature/Header";
 
 export default function Home() {
   return (
-    <div className="flex flex-col w-[1440px] m-auto shadow-xs  gap-13  max-sm:w-full max-sm:gap-13   ">
+    <div className="flex flex-col w-[1440px] m-auto  gap-13  max-sm:w-full max-sm:gap-13   ">
       {/* {ImgUrl.map((item, key) => {
         return <Header key={key} />;
       })} */}
