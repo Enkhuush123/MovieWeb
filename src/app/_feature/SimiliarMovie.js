@@ -29,7 +29,7 @@ export const SimiliarMov = () => {
     const data = await fetch(`${apiSim}&page=${page}`, options);
     const jsonData = await data.json();
     setSimiliar(jsonData.results);
-    setTotalPages(Math.min(jsonData.total_pages, 50));
+    setTotalPages(jsonData.total_pages);
     setCurrentPage(page);
     setTimeout(() => setLoading(false), 600);
   };
@@ -81,11 +81,9 @@ export const SimiliarMov = () => {
 
   return (
     <div className="flex gap-[52px] w-[1440px] pl-20 max-sm:w-full max-sm:p-5 m-auto flex-col   ">
-      <div>
+      <div className="flex gap-10 flex-col">
         <div className="flex flex-row justify-between pt-[52px]">
           <h3 className="font-semibold text-2xl">More like this</h3>
-
-          <div></div>
         </div>
         <div className="flex flex-wrap gap-8 items-center max-sm:w-full">
           {similar.slice(0, 15).map((movie) => {

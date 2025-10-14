@@ -29,7 +29,7 @@ export const PopularShowMore = () => {
 
     const data = await fetch(`${apiBase}&page=${page}`, options);
     const jsonData = await data.json();
-    setTotalPages(Math.min(jsonData.total_pages, 50));
+    setTotalPages(jsonData.total_pages);
     setPopularShowMore(jsonData.results);
     setCurrentPage(page);
     setTimeout(() => setLoading(false), 600);
@@ -83,7 +83,7 @@ export const PopularShowMore = () => {
 
   return (
     <div className="flex flex-col w-[1440px]  gap-10 max-sm:w-full">
-      <div className="flex flex-col pl-[80px] pr-[80px] max-sm:p-5 ">
+      <div className="flex flex-col pl-[80px] pr-[80px] max-sm:p-5 gap-10 ">
         <div>
           <h3 className="font-semibold text-2xl">Popular Movies</h3>
         </div>

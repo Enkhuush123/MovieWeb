@@ -43,7 +43,7 @@ export const UpComingMovieSlide = () => {
 
   return (
     <div className="flex gap-[52px] m-auto max-sm:w-full   ">
-      <div className="flex flex-col pr-20 pl-20  m-auto max-sm:p-5 ">
+      <div className="flex flex-col pr-20 pl-20  m-auto max-sm:p-5 gap-10 ">
         <div className="flex flex-row justify-between  ">
           <h3 className="font-semibold text-2xl">Upcoming</h3>
           <div>

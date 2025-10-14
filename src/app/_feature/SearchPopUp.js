@@ -41,7 +41,7 @@ export const SearchPop = () => {
     setSearchResultsMovie(jsonData.results);
     setSearchResult(jsonData.total_results);
 
-    setTotalPages(Math.min(jsonData.total_pages, 50));
+    setTotalPages(jsonData.total_pages);
     setCurrentPage(page);
     setTimeout(() => setLoading(false), 600);
   };
@@ -99,7 +99,7 @@ export const SearchPop = () => {
       </div>
       <div className="w-[1440px] pr-20 pl-20 flex flex-row gap-8 max-sm:w-full max-sm:p-5 max-sm:flex-col">
         <div className="flex flex-col gap-7 max-sm:w-full">
-          <div className="flex  flex-col max-sm:w-full ">
+          <div className="flex  flex-col max-sm:w-full gap-10 ">
             <div className="max-sm:w-full">
               <p>
                 {searchResult} results for &quot;{id}&quot;
@@ -162,7 +162,7 @@ export const SearchPop = () => {
             </button>
           </div>
         </div>
-        <div className="border-b border-gray-300"></div>
+        <div className="border-r max-sm:border-b border-gray-300"></div>
         <div className="flex flex-col gap-5 ">
           <div className="flex gap-5 ">
             <div className=" w-[387px] flex flex-col flex-wrap  gap-5  rounded-lg  ">

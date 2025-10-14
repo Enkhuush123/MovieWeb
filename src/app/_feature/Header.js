@@ -146,33 +146,86 @@ export const Header = ({}) => {
             </div>
           )}
         </div>
-        <div>
+        <div className="flex items-center">
           <div
-            className=" flex items-center  gap-2 max-sm:flex max-sm:gap-0 max-sm:w-9 max-sm:h-9  w-[379px] h-[36px] rounded-lg p-3 border border-[#E4E4E7] max-sm:justify-center    ]
+            className="flex  gap-2 max-sm:flex max-sm:gap-0 max-sm:w-9 max-sm:h-9 pl-5 max-sm:p-0   items-center justify-center h-9 rounded-lg  border border-[#E4E4E7] max-sm:justify-center    ]
                 "
           >
-            <div className=" w-[11px] h-[11px]   ">
-              <button
-                className="hidden max-sm:flex cursor-pointer  "
-                onClick={() => setMobileBar(!mobileBar)}
-              >
-                <SearchIcon className="text-[#FAFAFA] flex justify-center items-center" />
-              </button>
-            </div>
+            <button
+              className="hidden max-sm:flex cursor-pointer  "
+              onClick={() => setMobileBar(!mobileBar)}
+            >
+              <SearchIcon className="text-[#FAFAFA] flex justify-center items-center" />
+            </button>
 
-            <div className=" w-[11px] h-[11px] flex items-center max-sm:hidden">
+            <div className=" w-[11px] h-[11px] flex items-center max-sm:hidden ">
               <SearchIcon className="text-[#FAFAFA]" />
             </div>
+
             <div className="max-sm:hidden w-[379px]  ">
               <input
                 value={searchInput}
                 onChange={searchHandle}
-                className="pl-2 outline-none w-[335px] flex items-center "
-                type="search"
+                className="pl-2 outline-none items-center "
                 placeholder="Search"
               ></input>
             </div>
           </div>
+          {loading && (
+            <div className="w-[537px] h-[100px] bg-white absolute max-sm:w-full  max-sm:absolute max-sm:left-0 flex justify-center  items-center flex-col top-20  z-50 shadow rounded-lg ">
+              <div className="flex flex-col items-center justify-center gap-2">
+                <div className="w-6 h-6 border-4 border-gray-300 border-t-indigo-600 rounded-full animate-spin"></div>
+              </div>
+            </div>
+          )}
+          {!loading && searchInput && searchResults.length === 0 && (
+            <div className="w-[537px] h-[100px] bg-white absolute max-sm:w-full  max-sm:absolute max-sm:left-0 flex justify-center  items-center flex-col top-20  z-50 shadow rounded-lg">
+              <p className="text-gray-600 text-sm font-medium">
+                No results found
+              </p>
+            </div>
+          )}
+          {searchResults.length > 0 && (
+            <div className="w-[537px] h-auto bg-white dark:bg-black absolute max-sm:w-full max-sm:left-0 flex justify-center items-center  flex-col top-20  z-50 shadow rounded-lg ">
+              {searchResults.slice(0, 5).map((movie) => {
+                return (
+                  <div
+                    onClick={() => router.push(`/movie-detail/${movie.id}`)}
+                    className="w-[537px] h-auto flex gap-3 hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black p-2 border-b border-gray-300  cursor-pointer z-50 max-sm:w-full  "
+                    key={movie.id}
+                    title={movie.title}
+                  >
+                    <div className="w-[67px] h-[100px] flex-shrink-0">
+                      <img
+                        className="w-[67px] h-[100px] rounded object-cover max-sm:w-full  "
+                        src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
+                      ></img>
+                    </div>
+                    <div className="flex flex-col w-full ">
+                      <div>{movie.title}</div>
+                      <div className="flex  items-center gap-1 text-sm">
+                        <Star />{" "}
+                        <p>
+                          {movie.vote_average}
+                          <span className="text-xs text-gray-500">/10</span>
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="flex items-end justify-end w-full   ">
+                      <p>{movie.release_date}</p>
+                    </div>
+                  </div>
+                );
+              })}
+              <div
+                onClick={() => router.push(`/search-detail/${searchInput}`)}
+                className="w-[230p] h-[40px] flex  items-center cursor-pointer "
+              >
+                See all results for &quot;{searchInput}&quot;
+              </div>
+            </div>
+          )}
         </div>
         <div
           className={` rounded-lg w-[36px] h-[36px] border border-[#E4E4E7] flex items-center justify-center transition md:hidden ${
@@ -196,59 +249,6 @@ export const Header = ({}) => {
             type="search"
             placeholder="Search"
           ></input>
-        </div>
-      )}
-      {loading && (
-        <div className="w-[537px] h-[100px] bg-white absolute max-sm:w-full  max-sm:absolute max-sm:left-0 flex justify-center left-250 items-center flex-col top-20  z-50 shadow rounded-lg ">
-          <div className="flex flex-col items-center justify-center gap-2">
-            <div className="w-6 h-6 border-4 border-gray-300 border-t-indigo-600 rounded-full animate-spin"></div>
-          </div>
-        </div>
-      )}
-      {!loading && searchInput && searchResults.length === 0 && (
-        <div className="w-[537px] h-[100px] bg-white absolute max-sm:w-full  max-sm:absolute max-sm:left-0 flex justify-center left-250 items-center flex-col top-20  z-50 shadow rounded-lg">
-          <p className="text-gray-600 text-sm font-medium">No results found</p>
-        </div>
-      )}
-      {searchResults.length > 0 && (
-        <div className="w-[537px] h-auto bg-white dark:bg-black absolute max-sm:w-full  max-sm:absolute max-sm:left-0 flex justify-center items-center left-250 flex-col top-20  z-50 shadow rounded-lg ">
-          {searchResults.slice(0, 5).map((movie) => {
-            return (
-              <div
-                onClick={() => router.push(`/movie-detail/${movie.id}`)}
-                className="w-[537px] h-auto flex gap-3 hover:bg-black hover:text-white p-2 border-b border-gray-300  cursor-pointer z-50 max-sm:w-full  "
-                key={movie.id}
-                title={movie.title}
-              >
-                <div className="w-[67px] h-[100px] flex-shrink-0">
-                  <img
-                    className="w-[67px] h-[100px] rounded object-cover max-sm:w-full  "
-                    src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
-                  ></img>
-                </div>
-                <div className="flex flex-col w-full ">
-                  <div>{movie.title}</div>
-                  <div className="flex  items-center gap-1 text-sm">
-                    <Star />{" "}
-                    <p>
-                      {movie.vote_average}
-                      <span className="text-xs text-gray-500">/10</span>
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-end justify-end w-full   ">
-                  <p>{movie.release_date}</p>
-                </div>
-              </div>
-            );
-          })}
-          <div
-            onClick={() => router.push(`/search-detail/${searchInput}`)}
-            className="w-[230p] h-[40px] flex  items-center cursor-pointer "
-          >
-            See all results for &quot;{searchInput}&quot;
-          </div>
         </div>
       )}
     </div>

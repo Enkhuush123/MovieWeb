@@ -206,7 +206,7 @@ export const MovieDetails = () => {
       </div>
 
       <div className="flex gap-[52px] w-[1280px] max-sm:w-full max-sm:gap-0 ">
-        <div className="flex flex-col  max-sm:p-5">
+        <div className="flex flex-col  max-sm:p-5 gap-10">
           <div className="flex flex-row justify-between  ">
             <h3 className="font-semibold text-2xl">More like this</h3>
 

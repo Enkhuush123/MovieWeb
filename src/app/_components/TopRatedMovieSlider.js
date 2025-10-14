@@ -44,7 +44,7 @@ export const TopRatedMovieSlider = () => {
 
   return (
     <div className="flex gap-[52px] max-sm:w-full ">
-      <div className="flex flex-col pr-20 pl-20  max-sm:p-5 ">
+      <div className="flex flex-col pr-20 pl-20  max-sm:p-5 gap-10 ">
         <div className="flex flex-row justify-between ">
           <h3 className="font-semibold text-2xl">Top Rated</h3>
 

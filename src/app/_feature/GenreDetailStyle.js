@@ -41,7 +41,7 @@ export const GenreStyle = () => {
     const data02 = await fetch(`${apiGenreList}&page=${page}`, options);
     const jsonData02 = await data02.json();
     setGenreMovies(jsonData02.results);
-    setTotalPages(Math.min(jsonData02.total_pages, 50));
+    setTotalPages(jsonData02.total_pages);
     setTotalResults(jsonData02.total_results);
     setCurrentPage(page);
     console.log(genreMovies, "moive");
@@ -127,7 +127,7 @@ export const GenreStyle = () => {
         <div className="border-r max-sm:border-t mx-sm:w-full"></div>
 
         <div>
-          <div>
+          <div className="flex flex-col gap-10">
             <p>
               {totalResults} titles in &quot;
               {genreList.find((g) => g.id == id)?.name || "Genre"}&quot;

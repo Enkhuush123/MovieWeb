@@ -12,15 +12,19 @@ export const MovieCard = (props) => {
     if (!movieId) return;
     router.push(`/movie-detail/${movieId}`);
   };
+
+  const imageSrc = img
+    ? `https://image.tmdb.org/t/p/original${img}`
+    : "/noimage.png";
   return (
     <div
-      className={`w-[229.73px]  flex flex-col   pt-[32px] rounded-lg cursor-pointer hover:scale-110 max-sm:w-[45%] max-sm:-h[48%] `}
+      className={`w-[229.73px]  flex flex-col  rounded-lg cursor-pointer hover:scale-110 max-sm:w-[45%] max-sm:-h[48%] `}
       onClick={HandleMovieDetailClick}
     >
       <div className="w-full aspect-[2/3] overflow-hidden rounded-t-lg hover:opacity-[0.5] ">
         <img
           className="w-full h-full object-cover   "
-          src={`https://image.tmdb.org/t/p/original${img}`}
+          src={imageSrc}
           alt="poster"
         ></img>
       </div>

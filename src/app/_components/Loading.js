@@ -8,7 +8,7 @@ export const Loading = () => {
           <div className="w-[250px] h-[32px] bg-gray-300 rounded-full max-sm:w-[170px] dark:bg-[#27272A]"></div>
         </div>
         <div className="flex flex-wrap gap-8  max-sm:w-full">
-          {Array.from({ length: 10 }).map((_, i) => (
+          {Array.from({ length: 20 }).map((_, i) => (
             <div
               key={i}
               className="w-[229.73px] h-[439px] bg-gray-300 rounded-lg max-sm:w-[45%] max-sm:h-[284px] dark:bg-[#27272A]   "
