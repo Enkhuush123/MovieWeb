@@ -172,17 +172,15 @@ export const Header = ({}) => {
             </div>
           </div>
           {loading && (
-            <div className="w-[537px] h-[100px] bg-white absolute max-sm:w-full  max-sm:absolute max-sm:left-0 flex justify-center  items-center flex-col top-20  z-50 shadow rounded-lg ">
+            <div className="w-[537px] h-[100px] bg-white dark:bg-black absolute max-sm:w-full  max-sm:absolute max-sm:left-0 flex justify-center  items-center flex-col top-20  z-50 shadow rounded-lg ">
               <div className="flex flex-col items-center justify-center gap-2">
                 <div className="w-6 h-6 border-4 border-gray-300 border-t-indigo-600 rounded-full animate-spin"></div>
               </div>
             </div>
           )}
           {!loading && searchInput && searchResults.length === 0 && (
-            <div className="w-[537px] h-[100px] bg-white absolute max-sm:w-full  max-sm:absolute max-sm:left-0 flex justify-center  items-center flex-col top-20  z-50 shadow rounded-lg">
-              <p className="text-gray-600 text-sm font-medium">
-                No results found
-              </p>
+            <div className="w-[537px] h-[100px] bg-white dark:bg-black  absolute max-sm:w-full  max-sm:absolute max-sm:left-0 flex justify-center  items-center flex-col top-20  z-50 shadow rounded-lg">
+              <p className=" text-sm font-medium">No results found</p>
             </div>
           )}
           {searchResults.length > 0 && (
@@ -198,7 +196,11 @@ export const Header = ({}) => {
                     <div className="w-[67px] h-[100px] flex-shrink-0">
                       <img
                         className="w-[67px] h-[100px] rounded object-cover max-sm:w-full  "
-                        src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
+                        src={
+                          movie.poster_path
+                            ? `https://image.tmdb.org/t/p/original/${movie.poster_path}`
+                            : "/noimage.png"
+                        }
                       ></img>
                     </div>
                     <div className="flex flex-col w-full ">

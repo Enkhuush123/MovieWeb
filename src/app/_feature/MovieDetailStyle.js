@@ -122,7 +122,11 @@ export const MovieDetails = () => {
           <div className="w-[760px] h-[428px] relative max-sm:w-full max-sm:h-[283px] object-cover  ">
             <img
               className="w-[760px] h-[428px] rounded-lg absolute -z-10 max-sm:flex max-sm:relative max-sm:w-full max-sm:h-[283px] object-cover max-sm:rounded-none flex-shrink-0"
-              src={`https://image.tmdb.org/t/p/original${movieDetail.backdrop_path}`}
+              src={
+                movieDetail.backdrop_path
+                  ? `https://image.tmdb.org/t/p/original${movieDetail.backdrop_path}`
+                  : "/noimage.png"
+              }
               alt={movieDetail.title}
             ></img>
             <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-100 rounded-b-lg  ">
@@ -144,7 +148,11 @@ export const MovieDetails = () => {
           <div className="w-[290px] h-[428px] max-sm:w-full max-sm:h-full object-cover max-sm:hidden  ">
             <img
               className=" w-[290px] h-[428px] rounded-lg max-sm:w-[100px] max-sm:h-[148px] object-cover"
-              src={`https://image.tmdb.org/t/p/original${movieDetail.poster_path}`}
+              src={
+                movieDetail.poster_path
+                  ? `https://image.tmdb.org/t/p/original${movieDetail.poster_path}`
+                  : "/noimage.png"
+              }
               alt={movieDetail.title}
             ></img>
           </div>
@@ -155,7 +163,11 @@ export const MovieDetails = () => {
           <div className="w-[290px] h-[428px] max-sm:w-full max-sm:h-full hidden max-sm:flex    ">
             <img
               className=" w-[290px] h-[428px] rounded-lg max-sm:w-[100px] max-sm:h-auto  max-sm:rounded-none flex-shrink-0   "
-              src={`https://image.tmdb.org/t/p/original${movieDetail.poster_path}`}
+              src={
+                movieDetail.poster_path
+                  ? `https://image.tmdb.org/t/p/original${movieDetail.poster_path}`
+                  : "/noimage.png"
+              }
               alt={movieDetail.title}
             ></img>
           </div>
@@ -206,9 +218,11 @@ export const MovieDetails = () => {
       </div>
 
       <div className="flex gap-[52px] w-[1280px] max-sm:w-full max-sm:gap-0 ">
-        <div className="flex flex-col  max-sm:p-5 gap-10">
-          <div className="flex flex-row justify-between  ">
-            <h3 className="font-semibold text-2xl">More like this</h3>
+        <div className="flex flex-col  max-sm:p-5 gap-10 w-full">
+          <div className="flex flex-row justify-between   ">
+            <div>
+              <h3 className="font-semibold text-2xl">More like this</h3>
+            </div>
 
             <div>
               <Link href={`/similiar-movies/${id}`}>

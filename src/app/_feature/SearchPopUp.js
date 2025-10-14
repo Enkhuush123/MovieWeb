@@ -111,7 +111,11 @@ export const SearchPop = () => {
                   <MovieCard
                     key={movie.id}
                     movieId={movie.id}
-                    img={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
+                    img={
+                      movie.poster_path
+                        ? `https://image.tmdb.org/t/p/original${movie.poster_path}`
+                        : "/noimage.png"
+                    }
                     id={movie.id}
                     title={movie.title}
                     rate={movie.vote_average}

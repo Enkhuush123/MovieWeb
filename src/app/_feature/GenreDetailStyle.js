@@ -124,7 +124,7 @@ export const GenreStyle = () => {
           </div>
         </div>
 
-        <div className="border-r max-sm:border-t mx-sm:w-full"></div>
+        <div className="border-r max-sm:border-t max-sm:w-full"></div>
 
         <div>
           <div className="flex flex-col gap-10">
@@ -132,7 +132,7 @@ export const GenreStyle = () => {
               {totalResults} titles in &quot;
               {genreList.find((g) => g.id == id)?.name || "Genre"}&quot;
             </p>
-            <div className="flex flex-wrap gap-8 w-[800px] max-sm:w-full max-sm:p-0">
+            <div className="flex flex-wrap gap-8 w-auto max-sm:w-full max-sm:p-0">
               {genreMovies.slice(0, 9).map((movie, genres) => {
                 return (
                   <MovieCard
